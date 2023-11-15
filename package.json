@@ -1,0 +1,41 @@
+{
+  "name": "tool-kit",
+  "version": "1.0.0",
+  "description": "一些常用的工具集合",
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz",
+    "changeset": "changeset",
+    "update:version": "changeset version",
+    "release": "changeset publish",
+    "publish": "pnpm publish -r"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">= 16.18.1"
+  },
+  "publicConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "author": "yx",
+  "license": "ISC",
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "git-cz": "^4.9.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.26.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  }
+}
