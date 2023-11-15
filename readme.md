@@ -249,6 +249,8 @@ module.exports = {
 
 commitlint 都设置好了，下面我们要实现提交时强制校验。
 
+husky (https://typicode.github.io/husky/getting-started.html)
+
 ```
 npm install husky -D
 
@@ -256,13 +258,22 @@ npm install husky -D
 npx husky install
 
 ```
-在.husky文件夹内创建commit-msg文件（注意不要建到husky/_那个文件夹里去了），内容如下：
+
+在.husky 文件夹内创建 commit-msg 文件（注意不要建到 husky/\_那个文件夹里去了），内容如下：
+
+执行命令
+
+```js
+ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+```
+
+生成文件：.husky/commit-msg
+
+```bash
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx --no -- commitlint --edit $1
 
 ```
-#!/bin/sh
-npx --no-install commitlint --edit "$1"
-```
 
-
-
-test
