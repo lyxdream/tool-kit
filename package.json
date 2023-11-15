@@ -4,7 +4,7 @@
   "description": "一些常用的工具集合",
   "main": "index.js",
   "scripts": {
-    "commit": "cz",
+    "commit": "git-cz",
     "changeset": "changeset",
     "update:version": "changeset version",
     "publish": "changeset publish",
