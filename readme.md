@@ -115,20 +115,201 @@ cd example
 pnpm install
 pnpm run dev
 
-5、代码规范
-commit 提交规范
-1、规范工具
-npm install -D commitizen
-npm install -D git-cz (https://github.com/streamich/git-cz)
+5. 使用 ESLint、Prettier 和 Stylelint 来规范vue3+ts代码
+
+参考文章：
+[ESLint、Prettier 和 Stylelint 来规范代码](https://juejin.cn/post/7258831031728717881)
+
+思路：禁掉 ESLint 中与 Prettier 冲突的规则，然后使用 Prettier 做格式化， ESLint 做代码校验。
+
+```
+eslint：ESLint 核心模块
+eslint-plugin-vue：ESLint 插件，该插件用于提供针对 Vue.js 代码的规则和检查
+prettier：Prettier 核心模块
+eslint-plugin-prettier：ESLint 插件，该插件用于将 Prettier 的格式化规则集成到 ESLint 中
+eslint-config-prettier：ESLint 配置，它将禁用与 Prettier 格式化规则冲突的 ESLint 规则
+```
+
+-   1. [eslint](https://github.com/eslint/eslint)
+
+> eslint-plugin-vue 还提供了其他的规则包，具体可看官方文档[eslint-plugin-vue](https://eslint.vuejs.org/user-guide/#installation)。
+> @typescript-eslint/parser来解析.ts文件
+> ESLint 本身也提供一些内置的规则包，如：eslint:recommended，
+
+```bash
+npm init @eslint/config
+```
+
+选择vue和ts会发现package.json多了以下配置内容
+
+```bash
+"eslint": "^8.53.0",
+"eslint-plugin-vue": "^9.18.1",
+"@typescript-eslint/eslint-plugin": "^6.11.0",
+"@typescript-eslint/parser": "^6.11.0",
+```
+
+生成了如下配置文件
 
 ```js
+//.eslintrc.js
+module.exports = {
+    env: {
+        browser: true,
+        es2021: true
+    },
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:vue/vue3-essential', //加上防止错误或意外行为的规则。
+        'plugin:vue/vue3-recommended' //加上强制执行主观社区默认值的规则，(手动增加的配置)
+    ],
+    overrides: [
+        {
+            env: {
+                node: true
+            },
+            files: ['.eslintrc.{js,cjs}'],
+            parserOptions: {
+                sourceType: 'script'
+            }
+        }
+    ],
+    parserOptions: {
+        ecmaVersion: 'latest',
+        parser: '@typescript-eslint/parser',
+        sourceType: 'module',
+        extraFileExtensions: ['.vue'] //(手动增加的配置)
+    },
+    plugins: ['@typescript-eslint', 'vue'],
+    rules: {}
+}
+```
+
+eslintignore 文件中可以添加那些不需要格式化的文件或文件夹，在美化代码挑 bug 时忽略这些文件。
+
+新建 .eslintignore 文件
+
+```bash
+/build/
+/.husky/
+```
+
+-   2. 安装 prettier
+
+```bash
+npm install --save-dev --save-exact prettier
+```
+
+新建.prettierrc 文件
+
+```bash
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+```
+
+在 .prettierignore 文件中可以添加那些不需要格式化的文件或文件夹，在美化代码挑 bug 时忽略这些文件。
+
+```bash
+/build/
+/.husky/
+```
+
+> 有时候 vscode 保存时会自动在一些代码末尾补全逗号，末尾逗号，但这在 eslint 严格模式下会导致报错！在 setting.json 中的 prettier 属性中 添加"trailingComma": "none"
+
+```
+//.prettierrc
+{
+  "trailingComma": "none",
+  "tabWidth": 4,
+  "semi": false,
+  "singleQuote": true
+}
+```
+
+-   3. eslint和prettier混合使用：
+
+```bash
+npm install --save-dev eslint-plugin-prettier
+npm install --save-dev eslint-config-prettier
+
+```
+
+```js
+//.eslintrc.js
+extends: [
+    'plugin:prettier/recommended'
+]
+```
+
+-   4. 使用 tslint
+
+> eslint 是检查 JavaScript 的，而 tslint 是检查 typescript 的，当然你也可以在 eslint 配置中增加对 typescript 的支持，用来检查 typescript。主要用于检查代码规范和语法错误
+> prettier 是用来检查代码风格的，项目中常屏蔽掉 tslint 中有关代码规范的规则，这部分交由 prettier 校验，tslint 仅仅校验代码功能性错误。
+
+```bash
+npm install tslint  --save-dev
+npm install tslint-config-standard --save-dev
+npm install --save-dev tslint-plugin-prettier prettier
+```
+
+tslint.json
+
+```json
+{
+    "extends": ["tslint-plugin-prettier", "tslint-config-standard"],
+    "rules": {
+        "prettier": [true, "configs/.prettierrc"]
+    }
+}
+```
+
+-   5. [stylelint](https://www.stylelint.com.cn/user-guide/get-started)
+
+(1)安装 Stylelint 和配置文件
+
+```bash
+npm install --save-dev stylelint stylelint-config-standard-scss
+```
+
+（2）在项目的根目录中创建 .stylelintrc.json 配置文件并写入以下内容：
+
+```json
+{
+    "extends": "stylelint-config-standard-scss"
+}
+```
+
+参考文章：
+[eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)
+[tslint-plugin-prettier] (https://github.com/prettier/tslint-plugin-prettier)
+[tslint-config-standard] (https://www.npmjs.com/package/tslint-config-standard)
+[9种前端代码质量工具]（https://blog.csdn.net/weixin_52003205/article/details/133886173）
+[Vue 项目中使用 ESLint 和 Prettier](https://zhuanlan.zhihu.com/p/337536349)
+[使用 ESLint、Prettier 和 Stylelint 来规范代码](https://juejin.cn/post/7258831031728717881)
+
+6. commit代码规范
+
+-   1. 规范工具
+
+```bash
+npm install -D commitizen
+npm install -D git-cz
+```
+
+```json
+//package.json
  "scripts": {
     "commit": "cz"
+  },
+  "config": {
+        "commitizen": {
+            "path": "git-cz"
+        }
   },
 
 ```
 
-git-cz 工具它也是提供自定义配置的，但是配置项有限。在根目录添加 changelog.config.js
+[git-cz](https://github.com/streamich/git-cz) 工具它也是提供自定义配置的，但是配置项有限。在根目录添加 changelog.config.js
 
 ```js
 module.exports = {
@@ -224,40 +405,43 @@ module.exports = {
 }
 ```
 
-提交
+运行以下命令便可以看到配置的效果：
 
 ```bash
 npm run commit
 ```
 
-2、校验规则
+-   2.校验commit信息
+
+[commitlint](https://github.com/conventional-changelog/commitlint) 校验commit信息是否符合 angluar 规范
 
 ```bash
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
 ```
 
-commitlint：https://github.com/conventional-changelog/commitlint
-
-新建一个 .commitlintrc.js 或 commitlint.config.js。commitlint 会找到这个文件，按文件中指定的 extends 去校验 commit 信息
-
-也可以自定义设置一些 https://commitlint.js.org/#/reference-rules
+新建一个 .commitlintrc.js 或 commitlint.config.js，commitlint 会找到这个文件，按文件中指定的 extends 去校验 commit 信息
 
 ```js
+//.commitlintrc.js
 module.exports = {
     extends: ['@commitlint/config-conventional']
 }
 ```
 
-3、校验
+也可以自定义设置一些规则 [commitlint Rules](https://commitlint.js.org/#/reference-rules)
 
-commitlint 都设置好了，下面我们要实现提交时强制校验。
+-   3. 校验
 
-husky (https://typicode.github.io/husky/getting-started.html)
+commitlint 都设置好了，下面我们要实现提交时强制校验
 
-```
+主要用了husky 和 lint-staged
+
+[husky] (https://typicode.github.io/husky/getting-started.html)
+
+```bash
 npm install husky -D
 
-在控制台输入命令，生成.husky文件夹：
+# 在控制台输入命令，生成.husky文件夹：
 npx husky install
 
 ```
@@ -280,17 +464,16 @@ npx --no -- commitlint --edit $1
 
 ```
 
-lint-staged 代码校验规范
+接下来在package.json文件里面配置
 
-直接在 pre-commit 钩子里执行 npm run lint，这样有个问题，如果项目大了，你只修改一个文件，但它仍然会校验 src 下所有文件，就会导致提个代码慢的要死等半天。而 lint-staged 就能解决这个问题，它只会校验你修改的那部分文件。好了，了解前因后果后我们开始吧~
+```json
+ "lint": "eslint ./packages  --ext .js,.ts,.tsx,.vue,.mjs,.cjs",
+```
 
-对于大型项目，在每个文件上运行 ESLint 可能会消耗大量的时间。同样，在旧项目中消耗时间解决 ESLint 抛出的问题而不是研发新功能，是没意义的事。
+> 直接在 pre-commit 钩子里执行 npm run lint，这样有个问题，对于大型项目，在每个文件上运行 ESLint 可能会消耗大量的时间。
+> 而 lint-staged 就能解决这个问题，它只会校验你修改的那部分文件
 
-那么，我们如何只在我们更改的代码上运行 ESLint?
-
-答案是 lint-staged。它的作用是只在当前提交中对已更改的文件运行 pre-commit hooks。并且还能对代码进行更多的设置，比如使用 prettier 格式化代码
-
-https://github.com/lint-staged/lint-staged
+[lint-staged](https://github.com/lint-staged/lint-staged) ,它的作用是只在当前提交中对已更改的文件运行 pre-commit hooks。并且还能对代码进行更多的设置。话不多说，上代码。
 
 安装 lint-staged
 
@@ -298,22 +481,17 @@ https://github.com/lint-staged/lint-staged
 npm install -D lint-staged
 ```
 
-package.json
-
 ```json
+//package.json
   "scripts":{
-    "lint-staged": "lint-staged",
+      "lint:staged": "lint-staged",
+       "lint": "eslint ./packages  --ext .js,.ts,.tsx,.vue,.mjs,.cjs",
   },
   "lint-staged": {
-    "packages/**/*.scss": [
-      "stylelint --fix"
-    ],
-    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
-      "package.json": ["prettier --write"],
-    "*.vue": ["eslint --fix", "prettier --write", "stylelint --fix"],
-    "*.{scss,less,html}": ["stylelint --fix", "prettier --write"],
-    "*.md": ["prettier --write"]
-}
+    "*.{md,json}": "prettier --write",
+    "*.{ts,tsx,js,vue,scss}": "prettier --write",
+    "*.{ts,tsx,js,jsx,vue}": "eslint --fix"
+  }
 
 ```
 
@@ -329,194 +507,5 @@ package.json
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run  lint-staged
+npx --no-install lint-staged
 ```
-
-使用 ESLint、Prettier 和 Stylelint 来规范代码
-https://juejin.cn/post/7258831031728717881
-
-1、eslint （https://github.com/eslint/eslint）
-npm init @eslint/config
-
-在 .prettierignore 和 .eslintignore 文件中可以添加那些不需要格式化的文件或文件夹，在美化代码挑 bug 时忽略这些文件。
-
-新建 .eslintignore 文件
-
-```bash
-/build/
-/.husky/
-```
-
-2、
-安装 prettier
-
-npm install --save-dev --save-exact prettier
-
-新建.prettierrc 文件
-
-```bash
-node --eval "fs.writeFileSync('.prettierrc','{}\n')"
-```
-
-思路：禁掉 ESLint 中与 Prettier 冲突的规则，然后使用 Prettier 做格式化， ESLint 做代码校验。
-
-社区提出了这样一种解决方案：
-目的：使用 eslint --fix 就能完成格式化和校验的工作，格式化使用 Prettier，代码校验使用 ESLint。
-
-要使用 ESLint 和 Prettier 当然先得安装他们啦，然后还需要安装 eslint-plugin-prettier。
-
-```bash
-npm install --save-dev --save-exact prettier
-npm install eslint --save-dev
-​
-npm install --save-dev eslint-plugin-prettier
-
-```
-
-在 .prettierignore 和 .eslintignore 文件中可以添加那些不需要格式化的文件或文件夹，在美化代码挑 bug 时忽略这些文件。
-
-为了防止 Prettier 和 ESLint 格式化功能冲突，还需要安装 eslint-config-prettier 来关闭 ESLint 中的代码格式化功能
-
-```bash
-npm install --save-dev eslint-config-prettier
-```
-
-.eslintrc.json
-
-```json
-{
-    "extends": ["plugin:prettier/recommended"]
-}
-```
-
-有时候 vscode 保存时会自动在一些代码末尾补全逗号，末尾逗号，但这在 eslint 严格模式下会导致报错！
-
-在 setting.json 中的 prettier 属性中 添加"trailingComma": "none"
-
-复制代码
-"vetur.format.defaultFormatterOptions": {
-"prettier": {
-"semi": false, // 格式化时不加分号
-"singleQuote": true, // 格式化时使用单引号
-"trailingComma": "none", // 格式化时末尾不添加逗号
-}
-}  
-复制代码
-如果不生效，则找到对应配置 XXXrc.js
-
-如 js 的格式化程序是 prettier，prettier 的配置文件 可能是 .prettierrc.js ，在该文件内配置 "trailingComma": "none" 则可能生效
-
-3、eslint 是检查 JavaScript 的，而 tslint 是检查 typescript 的，当然你也可以在 eslint 配置中增加对 typescript 的支持，用来检查 typescript。主要用于检查代码规范和语法错误
-prettier 是用来检查代码风格的，项目中常屏蔽掉 tslint 中有关代码规范的规则，这部分交由 prettier 校验，tslint 仅仅校验代码功能性错误。
-
--   eslint 配置中增加对 typescript 的支持
-    ..eslintrc.js
-
-```js
-extends: [
-    'standard-with-typescript'
-]
-```
-
--   tslint
-
-```bash
-npm install tslint  --save-dev
-npm install tslint-config-standard --save-dev
-npm install --save-dev tslint-plugin-prettier prettier
-```
-
-tslint.json
-
-```json
-{
-    "extends": ["tslint-plugin-prettier", "tslint-config-standard"],
-    "rules": {
-        "prettier": [true, "configs/.prettierrc"]
-    }
-}
-```
-
-4、stylelint
-https://www.stylelint.com.cn/user-guide/get-started
-
-(1)安装 Stylelint 和配置文件
-
-```bash
-npm install --save-dev stylelint stylelint-config-standard-scss
-```
-
-（2）在项目的根目录中创建 .stylelintrc.json 配置文件并写入以下内容：
-
-```json
-{
-    "extends": "stylelint-config-standard-scss"
-}
-```
-
-5 解决报错
-
-https://eslint.vuejs.org/user-guide/#installation
-
-```
-npm install --save-dev eslint eslint-plugin-vue
-```
-
-Example .eslintrc.js:
-
-```js
-module.exports = {
-    extends: [
-        // add more generic rulesets here, such as:
-        // 'eslint:recommended',
-        'plugin:vue/vue3-recommended'
-        // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
-    ],
-    rules: {
-        // override/add rules settings here, such as:
-        // 'vue/no-unused-vars': 'error'
-    }
-}
-```
-
-npm install @typescript-eslint/parser -D
-
-"parserOptions": {
-.....
-"parser": "@typescript-eslint/parser",
-"project": './tsconfig.json',
-....
-},
-
-运行 ts 文件
-ts-node 库
-全局安装 ts-node 库：
-
-npm install ts-node -g
-安装好 ts-node 库之后，为了运行 ts 文件，我们还需要安装另外两个依赖：
-
-tslib
-@types/node
-npm install tslib @types/node -g
-使用 ts-node 库，只需要在终端输入下面的命令
-
-ts-node TypeScript.ts
-ts-node 库会帮我们做两件事，首先把 ts 编译成 js 文件，再在 node 环境中运行 js 文件。
-
-或在在命令行上，运行 TypeScript 编译器：
-
-```bash
-tsc xxx.ts
-```
-
-参考文章：
-eslint-plugin-prettier https://github.com/prettier/eslint-plugin-prettier
-Vue 项目中使用 ESLint 和 Prettier https://zhuanlan.zhihu.com/p/337536349
-
-如果使用 tslint 可参考
-tslint-plugin-prettier 插件使用:https://github.com/prettier/tslint-plugin-prettier
-tslint-config-standard https://www.npmjs.com/package/tslint-config-standard
-使用 tslint 和 prettier 规范代码 https://segmentfault.com/a/1190000022665349?utm_source=sf-similar-article
-9种前端代码质量工具  
-ESLint 和Prettier 可以组合使用
-也可以 ESLint 和 Stylelint组合使用
