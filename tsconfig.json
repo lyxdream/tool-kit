@@ -1,43 +1,36 @@
 {
-  "compilerOptions": {
-    "module": "ESNext", // 指定要使用的模块化的规范
-    "target": "es6", // 遵循es6版本
-    "moduleResolution": "node", // 按照node模块来解析
-    "esModuleInterop": true, // 支持es6,commonjs模块
-    "lib": [
-      "es2016",
-      "dom"
-    ], // // 编译时用的库
-    "jsx": "preserve", // jsx 不转
-    "noLib": false, // 不处理类库
-    "noImplicitAny": false, // 支持类型不标注可以默认any
-    "removeComments": true, // 删除注释
-    "strict": false,
-    "sourceMap": true,
-    "declaration": true, // // 要声明文件 
-    "resolveJsonModule": true, // 解析json模块
-    "allowSyntheticDefaultImports": true, // 允许没有导出的模块中导入
-    "experimentalDecorators": true, //是否支持实验性装饰器。
-    "emitDecoratorMetadata": true, //是否支持装饰器
-    "forceConsistentCasingInFileNames": true, // 强制区分大小写
-    "skipLibCheck": true, // 跳过类库检测
-    "declarationDir": "dist/types", //为生成的声明文件指定输出目录
-    "outDir": "dist/lib", //编译输出目录。
-    "typeRoots": [
-      "node_modules/@types"
-    ], //指定类型声明文件的根目录
-    "baseUrl": "./", //指定基础目录
-    "paths": { //指定模块路径别名
-      "src/*": [
-        "src/*"
-      ]
-    }
-  },
-  "include": [
-    "packages",
-  ], //指定需要编译的文件路径或文件夹路径
-  "exclude": [ // 排除掉哪些类库
-    "node_modules",
-    "dist/**"
-  ]
+    "compilerOptions": {
+        "module": "ESNext", // 指定要使用的模块化的规范
+        "target": "es6", // 遵循es6版本
+        "moduleResolution": "node", // 按照node模块来解析
+        "esModuleInterop": true, // 支持es6,commonjs模块
+        "lib": ["es2016", "dom"], // // 编译时用的库
+        "jsx": "preserve", // jsx 不转
+        "noLib": false, // 不处理类库
+        "noImplicitAny": false, // 支持类型不标注可以默认any
+        "removeComments": true, // 删除注释
+        "strict": false,
+        "sourceMap": true,
+        "declaration": true, // // 要声明文件
+        "resolveJsonModule": true, // 解析json模块
+        "allowSyntheticDefaultImports": true, // 允许没有导出的模块中导入
+        "experimentalDecorators": true, //是否支持实验性装饰器。
+        "emitDecoratorMetadata": true, //是否支持装饰器
+        "forceConsistentCasingInFileNames": true, // 强制区分大小写
+        "skipLibCheck": true, // 跳过类库检测
+        "declarationDir": "dist/types", //为生成的声明文件指定输出目录
+        "outDir": "dist/lib", //编译输出目录。
+        "typeRoots": ["node_modules/@types"], //指定类型声明文件的根目录
+        "baseUrl": "./", //指定基础目录
+        "paths": {
+            //指定模块路径别名
+            "packages/*": ["packages/*"]
+        }
+    },
+    "include": ["packages"], //指定需要编译的文件路径或文件夹路径
+    "exclude": [
+        // 排除掉哪些类库
+        "node_modules",
+        "dist/**"
+    ]
 }

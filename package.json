@@ -1,44 +1,60 @@
 {
-  "name": "tool-kit",
-  "version": "1.0.0",
-  "description": "一些常用的工具集合",
-  "main": "index.js",
-  "scripts": {
-    "commit": "git-cz",
-    "changeset": "changeset",
-    "update:version": "changeset version",
-    "publish": "changeset publish",
-    "tag": " changeset tag"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "engines": {
-    "node": ">= 16.18.1"
-  },
-  "publicConfig": {
-    "registry": "http://registry.npmjs.org/"
-  },
-  "author": "yx",
-  "license": "ISC",
-  "devDependencies": {
-    "@commitlint/cli": "^18.4.1",
-    "@commitlint/config-conventional": "^18.4.0",
-    "commitizen": "^4.3.0",
-    "git-cz": "^4.9.0",
-    "husky": "^8.0.3"
-  },
-  "dependencies": {
-    "@changesets/cli": "^2.26.2",
-    "typescript": "^5.2.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "git-cz"
+    "name": "tool-kit",
+    "version": "1.0.0",
+    "description": "一些常用的工具集合",
+    "main": "index.js",
+    "scripts": {
+        "commit": "git-cz",
+        "lint:staged": "lint-staged",
+        "changeset": "changeset",
+        "update:version": "changeset version",
+        "publish": "changeset publish",
+        "tag": " changeset tag",
+        "lint": "eslint ./packages  --ext .js,.ts,.tsx,.vue,.mjs,.cjs"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "engines": {
+        "node": ">= 16.18.1"
+    },
+    "publicConfig": {
+        "registry": "http://registry.npmjs.org/"
+    },
+    "author": "yx",
+    "license": "ISC",
+    "devDependencies": {
+        "@commitlint/cli": "^18.4.1",
+        "@commitlint/config-conventional": "^18.4.0",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
+        "@typescript-eslint/parser": "^6.11.0",
+        "commitizen": "^4.3.0",
+        "eslint": "^8.53.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-vue": "^9.18.1",
+        "git-cz": "^4.9.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.1.0",
+        "prettier": "3.1.0",
+        "stylelint": "^15.11.0",
+        "stylelint-config-standard-scss": "^11.1.0",
+        "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "@changesets/cli": "^2.26.2"
+    },
+    "config": {
+        "commitizen": {
+            "path": "git-cz"
+        }
+    },
+    "lint-staged": {
+        "*.{md,json}": "prettier --write",
+        "*.{ts,tsx,js,vue,scss}": "prettier --write",
+        "*.{ts,tsx,js,jsx,vue}": "eslint --fix"
     }
-  }
 }
