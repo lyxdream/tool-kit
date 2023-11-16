@@ -1,34 +1,3 @@
-如何发布一个 npm 包：https://blog.csdn.net/BASK2312/article/details/128145705
-
-npm adduser  
-npm login
-npm logout
-npm publish
-
-npm who am i
-
-// "dev": "nodemon examples/server.js",
-// "build": "webpack --config ./webpack. .config.js",
-// "prepublishOnly": "npm run build"
-
-"publicConfig": {
-"registry": "http://registry.npmjs.org/",
-// "directory": "dist"
-},
-// "bugs": {
-// // "url": "https://github.com/ant-design/ant-design/issues"
-// },
-
-先进入 npm-package 项目根目录，然后执行 npm link 命令
-
-cd npm-package
-npm link
-npm ls --global --depth 0 查看全局软链的名称
-进入项目：npm link npm-package
-
-npm unlink npm-package
-sudo npm rm --global npm-package
-
 1、搭建环境
 
 npm install -g pnpm
