@@ -478,3 +478,16 @@ npm install -D lint-staged
 
 npx --no-install lint-staged
 ```
+
+7、创建文档
+
+mkdir docs && cd docs
+npm init -y
+pnpm add -D vitepress
+
+1、自定义主题(https://vitepress.dev/guide/custom-theme)
+2、评论
+3、搜索
+4、文档
+5、发布
+6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json

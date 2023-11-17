@@ -10,7 +10,10 @@
         "changeset": "changeset",
         "update:version": "changeset version",
         "publish": "changeset publish",
-        "tag": " changeset tag"
+        "tag": " changeset tag",
+        "docs:dev": "pnpm run -C docs docs:dev",
+        "docs:build": "pnpm run -C docs docs:build",
+        "docs:serve": "pnpm run -C docs docs:serve"
     },
     "files": [
         "dist"
