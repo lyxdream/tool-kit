@@ -1,18 +1,43 @@
-import { h, App } from 'vue'
-import { useData } from 'vitepress'
-import Theme from 'vitepress/theme'
+import { watch } from 'vue'
+import type { EnhanceAppContext, Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import './style/index.scss'
+let homePageStyle: HTMLStyleElement | undefined
+import Layout from './Layout.vue'
 
-export default Object.assign({}, Theme, {
-    Layout: () => {
-        const props: Record<string, any> = {}
-        // 获取 frontmatter
-        const { frontmatter } = useData()
-
-        /* 添加自定义 class */
-        if (frontmatter.value?.layoutClass) {
-            props.class = frontmatter.value.layoutClass
+export default {
+    extends: DefaultTheme,
+    Layout: Layout,
+    enhanceApp({ app, router, siteData }: EnhanceAppContext) {
+        if (typeof window !== 'undefined') {
+            watch(
+                () => router.route.data.relativePath,
+                () =>
+                    updateHomePageStyle(
+                        /* /vitepress-nav-template/ 是为了兼容 GitHub Pages */
+                        location.pathname === '/' ||
+                            location.pathname === '/vitepress-nav-template/'
+                    ),
+                { immediate: true }
+            )
         }
-
-        return h(Theme.Layout, props)
     }
-})
+} satisfies Theme
+
+// Speed up the rainbow animation on home page
+function updateHomePageStyle(value: boolean) {
+    if (value) {
+        if (homePageStyle) return
+
+        homePageStyle = document.createElement('style')
+        homePageStyle.innerHTML = `
+        :root {
+            animation: rainbow 12s linear infinite;
+        }`
+        document.body.appendChild(homePageStyle)
+    } else {
+        if (!homePageStyle) return
+        homePageStyle.remove()
+        homePageStyle = undefined
+    }
+}

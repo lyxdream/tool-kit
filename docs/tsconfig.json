@@ -10,12 +10,11 @@
         "strict": true,
         "noImplicitAny": false,
         "skipLibCheck": true,
-        "lib": ["WebWorker"],
+        "allowJs": true,
         "paths": {
-            "webrtc": ["../packages/webrtc"],
+            "webrtc": ["./webrtc/index"],
             "~/*": ["./.vitepress/vitepress/*"]
-        },
-        "jsx": "preserve"
+        }
     },
     "include": ["**/*", ".vitepress/**/*"],
     "exclude": ["node_modules"]

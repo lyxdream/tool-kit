@@ -1,0 +1,56 @@
+/*转圈圈*/
+.m-home-layout {
+    .image-src:hover {
+        transform: translate(-50%, -50%) rotate(666turn);
+        transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
+    }
+}
+
+/* 首页样式修改 */
+.VPHero {
+    .image-bg {
+        opacity: 0.8;
+        transition: opacity 1s ease;
+    }
+    .text {
+        line-height: 64px;
+        font-size: 42px;
+    }
+}
+
+/* 自定义块样式 */
+.custom-block .custom-block-title {
+    font-size: 16px;
+}
+.custom-block.tip .custom-block-title {
+    color: var(--vp-c-brand-1);
+}
+
+/* code-group 样式 */
+.vp-code-group .tabs label {
+    background-color: transparent;
+}
+
+/* table 样式 */
+table {
+    width: 100% !important;
+    display: table !important;
+}
+
+/* 导航样式 */
+.link.active,
+.link.active span,
+.VPNavBarMenuLink:hover span,
+.VPSidebarItem.is-active .link,
+.VPSidebar .link:hover {
+    color: var(--vp-c-brand-1);
+}
+
+.vp-doc a:hover,
+.vp-doc a > code:hover {
+    color: var(--vp-c-brand-2);
+}
+
+.dark .vp-doc .custom-block a {
+    transition: color 0.25s;
+}

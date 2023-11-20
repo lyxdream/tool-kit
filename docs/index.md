@@ -1,10 +1,11 @@
 ---
 layout: home
+layoutClass: 'm-home-layout'
 
 hero:
     name: '前端工具'
     text: '一个有趣的前端趣味工具仓库'
-    tagline: 开发日常使用中所用到的工具、插件等
+    tagline: 开发日常使用中所用到的日常提效工具、插件等
     image:
         src: /logo.png
         alt: 工具包
@@ -26,26 +27,3 @@ features:
       link: https://notes.fe-mm.com/fe/javascript/types
       linkText: 录屏插件
 ---
-
-<style>
-:root {
-  --vp-home-hero-name-color: blue;
-}
-</style>
-<style>
-/*爱的魔力转圈圈*/
-.m-home-layout .image-src:hover {
-  transform: translate(-50%, -50%) rotate(666turn);
-  transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
-}
-
-.m-home-layout .details small {
-  opacity: 0.8;
-}
-
-.m-home-layout .bottom-small {
-  display: block;
-  margin-top: 2em;
-  text-align: right;
-}
-</style>

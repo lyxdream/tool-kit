@@ -482,12 +482,155 @@ npx --no-install lint-staged
 7、创建文档
 
 mkdir docs && cd docs
-npm init -y
+pnpm init
 pnpm add -D vitepress
+pnpm add sass -D 安装sass
+pnpm dlx vitepress init 初始化
+
+文件结构
+
+```
+.
+├─ docs
+│  ├─ .vitepress
+
+│  ├─ markdown-examples.md
+│  └─ index.md
+└─ package.json
+```
+
+该docs目录被视为VitePress 站点的项目根目录。该.vitepress目录是 VitePress 配置文件、开发服务器缓存、构建输出和可选主题自定义代码的保留位置。
+
+> 默认情况下，VitePress 将其开发服务器缓存存储在 中.vitepress/cache，并将生产构建输出存储在 中.vitepress/dist。如果使用 Git，您应该将它们添加到您的.gitignore文件中。这些位置也可以配置。
+
+```
+docs/.vitepress/cache
+docs/.vitepress/dist
+```
+
+> 可能是因为我建的.gitignore在外层，直接写.vitepress/xxx不生效，加上docs/生效了
+
+配置文件
+配置文件 ( .vitepress/config.js) 允许您自定义 VitePress 站点的各个方面，最基本的选项是站点的标题和描述：
+
+```js
+// .vitepress/config.js
+export default {
+    // site-level options
+    title: 'VitePress',
+    description: 'Just playing around.',
+
+    themeConfig: {
+        // theme-level options
+    }
+}
+```
+
+默认主题配置
+
+```
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  themeConfig: {
+    // Type is `DefaultTheme.Config`
+  }
+})
+```
+
+自定义主题：
+
+如果您使用自定义主题并希望对主题配置进行类型检查，则需要改为使用自定义主题defineConfigWithTheme，并通过通用参数传入自定义主题的配置类型：
+
+```
+import { defineConfigWithTheme } from 'vitepress'
+import type { ThemeConfig } from 'your-theme'
+
+export default defineConfigWithTheme<ThemeConfig>({
+  themeConfig: {
+    // Type is `ThemeConfig`
+  }
+})
+```
+
+具体配置，可查看[站点配置](https://vitepress.dev/reference/site-config)
+
+为主页添加额外的class名称
+
+## yaml
+
+## layoutClass: 'm-home-layout'
+
+然后您可以在文件中自定义特定页面的样式.vitepress/theme/custom.scss：
+
+```scss
+.m-home-layout {
+    .image-src:hover {
+        transform: translate(-50%, -50%) rotate(666turn);
+        transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
+    }
+}
+```
+
+配置文件
+
+```
+import { h } from 'vue'
+import { useData } from 'vitepress'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import './style.scss'
+
+export default {
+    extends: DefaultTheme,
+    Layout: () => {
+        const props: Record<string, any> = {}
+        // 获取 frontmatter
+        const { frontmatter } = useData()
+
+        /* 添加自定义 class */
+        if (frontmatter.value?.layoutClass) {
+            props.class = frontmatter.value.layoutClass
+        }
+        // https://vitepress.dev/guide/extending-default-theme#layout-slots
+        return h(DefaultTheme.Layout, props, {
+        })
+    },
+    enhanceApp({ app, router, siteData }) {
+        // ...
+    }
+} satisfies Theme
+
+```
+
+-   支持自己定义主题（支持主题颜色动态变换）
+-   增加dark和light时候的动效
+-   支持搜索
+
+```
+// 本地搜索
+search: {
+    provider: 'local'
+},
+```
+
+-   评论
+-   构建发布
+
+doc | home | page
+doc- 将默认文档样式查看 Markdown 内容。
+home- “主页”的特殊布局。您可以添加额外的选项，例如hero和features来快速创建漂亮的登陆页面。
+page- 行为相似，doc但它不应用任何样式的内容。当您想要创建完全自定义的页面时很有用。
+
+导航配置
+https://vitepress.dev/reference/default-theme-sidebar
 
 1、自定义主题(https://vitepress.dev/guide/custom-theme)
 2、评论
 3、搜索
-4、文档
+4、组件交互（写文档）
 5、发布
 6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
+
+十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
+使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671

@@ -12,6 +12,7 @@
     "author": "yx",
     "license": "ISC",
     "devDependencies": {
+        "sass": "^1.69.5",
         "vitepress": "1.0.0-rc.20",
         "vue": "^3.3.4"
     }
