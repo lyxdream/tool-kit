@@ -7,7 +7,7 @@ hero:
     text: '一个有趣的前端趣味工具仓库'
     tagline: 开发日常使用中所用到的日常提效工具、插件等
     image:
-        src: /logo.png
+        src: /home.png
         alt: 工具包
     actions:
         - theme: brand
