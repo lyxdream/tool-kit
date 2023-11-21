@@ -4,7 +4,7 @@ import { sidebar, nav } from './configs'
 export default defineConfig({
   title: "前端工具",
   description: "开发日常使用中所用到的日常提效工具、插件等",
-  base: process.env.APP_BASE_PATH || '/',
+  base:'/tool-kit/',
   lang: 'zh-CN',
   lastUpdated: true,  //最近更新时间
   cleanUrls: true,
