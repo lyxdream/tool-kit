@@ -70,9 +70,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
-     steps:
-      - name: url
-        run:  echo ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
