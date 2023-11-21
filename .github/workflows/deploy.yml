@@ -1,24 +1,21 @@
-# Sample workflow for building and deploying a VitePress site to GitHub Pages
-#
+
 name: Deploy VitePress site to Pages
 
 on:
-  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
-  # using the `master` branch as the default branch.
   push:
     branches: main
 
-  # Allows you to run this workflow manually from the Actions tab
+  # 允许您从“操作”选项卡手动运行此工作流
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# 设置GITHUB_TOKEN的权限以允许部署到GITHUB页面
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# 只允许一次并发部署，跳过在进行中的运行和最近排队的运行之间排队的运行。.
+# 但是，不要取消正在进行的运行，因为我们希望完成这些生产部署。
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -49,7 +46,7 @@ jobs:
           cache: pnpm  # or pnpm / yarn
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v3  #此操作有助于支持从任何静态站点生成器部署到 GitHub Pages
 
       - name: Install dependencies
         run: |
@@ -61,6 +58,12 @@ jobs:
         run: |
           echo ${{ github.workspace }} 
           pnpm run docs:build
+
+      #  操作可以打包和上传项目
+     - name: Upload artifact
+       uses: actions/upload-pages-artifact@v2
+       with:
+          path: ./docs/.vitepress/dist
 
   # Deployment job
   deploy:
