@@ -53,12 +53,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-             cd ./docs
-             pnpm install --frozen-lockfile
+          cd ./docs
+          pnpm install --frozen-lockfile
 
       # 打包静态文件
       - name: Build
-        run: pnpm run docs:build
+        run: |
+          echo ${{ github.workspace }} 
+          pnpm run docs:build
 
   # Deployment job
   deploy:
