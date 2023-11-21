@@ -1,21 +1,25 @@
 
+# Sample workflow for building and deploying a VitePress site to GitHub Pages
+#
 name: Deploy VitePress site to Pages
 
 on:
+  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
+  # using the `master` branch as the default branch.
   push:
     branches: main
 
-  # 允许您从“操作”选项卡手动运行此工作流
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# 设置GITHUB_TOKEN的权限以允许部署到GITHUB页面
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 只允许一次并发部署，跳过在进行中的运行和最近排队的运行之间排队的运行。.
-# 但是，不要取消正在进行的运行，因为我们希望完成这些生产部署。
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -25,43 +29,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 拉取代码
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Not needed if lastUpdated is not enabled
-
+        # 设置 node 版本    
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm # or pnpm / yarn
        # 安装 pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
-
-       # 设置 node 版本    
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm  # or pnpm / yarn
-        #此操作有助于支持从任何静态站点生成器部署到 GitHub Pages
       - name: Setup Pages
-        uses: actions/configure-pages@v3  
-
+        uses: actions/configure-pages@v3
       - name: Install dependencies
         run: |
           cd ./docs
           pnpm install --frozen-lockfile
-
-      # 打包静态文件
+        # 打包静态文件
       - name: Build
         run: |
           echo ${{ github.workspace }} 
           pnpm run docs:build
-          
-      #  操作可以打包和上传项目
-     - name: Upload artifact
-       uses: actions/upload-pages-artifact@v2
-       with:
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
           path: ./docs/.vitepress/dist
 
   # Deployment job
@@ -76,3 +72,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+
+
+
+
