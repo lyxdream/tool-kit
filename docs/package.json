@@ -6,6 +6,7 @@
     "scripts": {
         "docs:dev": "vitepress dev --port=8733",
         "docs:build": "vitepress build",
+        "docs:deploy": "cross-env APP_BASE_PATH=/tool-kit/ vitepress build docs",
         "docs:preview": "vitepress preview"
     },
     "keywords": [],
