@@ -6,7 +6,7 @@
     "scripts": {
         "docs:dev": "vitepress dev --port=8733",
         "docs:build": "vitepress build",
-        "docs:deploy": "APP_BASE_PATH=/tool-kit/ vitepress build docs",
+        "docs:deploy": "APP_BASE_PATH=/tool-kit/ vitepress build",
         "docs:preview": "vitepress preview"
     },
     "keywords": [],
