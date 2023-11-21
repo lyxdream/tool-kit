@@ -79,7 +79,7 @@ jobs:
            # GitHub Pages 读取的分支
           branch: main
           # 静态文件所在目录
-          folder: ./docs/.vitepress/dist
+          folder: ./docs/dist
 
 
 
