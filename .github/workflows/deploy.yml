@@ -53,7 +53,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-             cd /docs
+             cd ./docs
              pnpm install --frozen-lockfile
 
       # 打包静态文件
