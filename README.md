@@ -647,6 +647,7 @@ https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-gith
 ## 发布博客网站
 
 进入你创建的GitHub仓库的配置，具体位置在Settings -> Pages -> Build and deployment -> Source。选择Deploy from a branch，即选择一个分支。
+我们去新建一个名为gh-pages的分支，创建完成后再次打开Pages，可以看到页面发生了变化
 
 -   管理个人访问令牌
     https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
