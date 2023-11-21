@@ -608,7 +608,7 @@ export default {
 -   支持搜索
 
 ```
-// 本地搜索
+// 本地搜索 Algolia 搜索
 search: {
     provider: 'local'
 },
@@ -626,11 +626,13 @@ page- 行为相似，doc但它不应用任何样式的内容。当您想要创�
 https://vitepress.dev/reference/default-theme-sidebar
 
 1、自定义主题(https://vitepress.dev/guide/custom-theme)
-2、评论
 3、搜索
+2、评论
 4、组件交互（写文档）
 5、发布
 6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
 
 十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
 使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
+
+1. 部署您的 VitePress 站点
