@@ -634,9 +634,21 @@ https://vitepress.dev/reference/default-theme-sidebar
 
 十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
 使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
+购买域名：https://www.jianshu.com/p/1b9f4f0db26d
+https://blog.csdn.net/qq_43173415/article/details/117741139
+https://www.jianshu.com/p/1b9f4f0db26d
 
 1. 部署您的 VitePress 站点
    2、自动化部署
 
-参考文档
+参考文档 通过 GitHub Pages 使用自定义工作流
 https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+## 发布博客网站
+
+进入你创建的GitHub仓库的配置，具体位置在Settings -> Pages -> Build and deployment -> Source。选择Deploy from a branch，即选择一个分支。
+
+-   管理个人访问令牌
+    https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
+
+第三步：Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.3,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看.

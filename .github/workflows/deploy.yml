@@ -64,16 +64,17 @@ jobs:
 
   # Deployment job
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # GitHub 密钥
+          accessToken: ${{ secrets.ACCESS_TOKEN }}
+           # GitHub Pages 读取的分支
+          branch: main
+          # 静态文件所在目录
+          folder: dist
 
 
 
