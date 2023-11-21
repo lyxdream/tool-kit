@@ -636,3 +636,4 @@ https://vitepress.dev/reference/default-theme-sidebar
 使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
 
 1. 部署您的 VitePress 站点
+   2、自动化部署
