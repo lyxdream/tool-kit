@@ -70,7 +70,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
-    steps:
+     steps:
+      - name: url
+        run:  echo ${{ steps.deployment.outputs.page_url }}
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -79,7 +81,7 @@ jobs:
            # GitHub Pages 读取的分支
           branch: main
           # 静态文件所在目录
-          folder: ./docs/dist
+          folder: ./.vitepress/dist
 
 
 
