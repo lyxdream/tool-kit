@@ -71,15 +71,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          # GitHub 密钥
-          accessToken: ${{ secrets.ACCESS_TOKEN }}
-           # GitHub Pages 读取的分支
-          branch: gh-pages
-          # 静态文件所在目录
-          folder: /docs/.vitepress/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
 
 
 
