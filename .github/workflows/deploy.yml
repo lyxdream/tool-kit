@@ -79,9 +79,9 @@ jobs:
           # GitHub 密钥
           accessToken: ${{ secrets.ACCESS_TOKEN }}
            # GitHub Pages 读取的分支
-          branch: main
+          branch: gh-pages
           # 静态文件所在目录
-          folder: ./.vitepress/dist
+          folder: docs/.vuepress/dist
 
 
 
