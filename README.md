@@ -647,7 +647,9 @@ https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-gith
 GitHub Actions 入门教程
 https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
 
-## 发布博客网站
+## GitHub Actions 实现自动部署静态博客
+
+#前言 发布博客网站
 
 进入你创建的GitHub仓库的配置，具体位置在Settings -> Pages -> Build and deployment -> Source。选择Deploy from a branch，即选择一个分支。
 我们去新建一个名为gh-pages的分支，创建完成后再次打开Pages，可以看到页面发生了变化
@@ -655,6 +657,16 @@ https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
 -   管理个人访问令牌
     https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
     https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+
+    https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+Github Token获取步骤，使用快人一步 https://blog.csdn.net/weixin_44786530/article/details/131933687
+
+https://github.com/JamesIves/github-pages-deploy-action
+
+https://github.com/marketplace/actions/deploy-github-pages-site
+
+https://docs.github.com/zh/actions/deployment/about-deployments/deploying-with-github-actions
 
 第三步：Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.3,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看.
 
