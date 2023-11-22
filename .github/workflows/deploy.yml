@@ -55,7 +55,7 @@ jobs:
       - name: Build
         run: |
           echo ${{ github.workspace }} 
-          pnpm run docs:build
+          pnpm run docs:deploy
       #此操作有助于支持从任何静态站点生成器部署到 GitHub Pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

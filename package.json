@@ -13,6 +13,7 @@
         "tag": " changeset tag",
         "docs:dev": "pnpm run -C docs docs:dev",
         "docs:build": "pnpm run -C docs docs:build",
+        "docs:deploy": "pnpm run -C docs docs:deploy",
         "docs:preview": "pnpm run -C docs docs:preview"
     },
     "files": [
