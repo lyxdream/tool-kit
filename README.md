@@ -644,6 +644,9 @@ https://www.jianshu.com/p/1b9f4f0db26d
 参考文档 通过 GitHub Pages 使用自定义工作流
 https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
 
+GitHub Actions 入门教程
+https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
+
 ## 发布博客网站
 
 进入你创建的GitHub仓库的配置，具体位置在Settings -> Pages -> Build and deployment -> Source。选择Deploy from a branch，即选择一个分支。
@@ -651,6 +654,7 @@ https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-gith
 
 -   管理个人访问令牌
     https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
+    https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
 
 第三步：Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.3,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看.
 
