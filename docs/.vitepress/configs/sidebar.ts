@@ -5,13 +5,18 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
         {
             text: 'webrtc',
             collapsed: false,
-            items: [{ text: 'Index', link: '/webrtc/' }]
+            items: [
+                {
+                    text: 'Index',
+                    link: '/webrtc/index'
+                }
+            ]
         }
     ],
     '/vscode-plugin/': [
         {
             text: 'vscode-plugin',
-            items: [{ text: 'Index', link: '/vscode-plugin/' }]
+            items: [{ text: 'Index', link: '/vscode-plugin/index' }]
         }
     ]
 }
