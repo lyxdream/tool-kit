@@ -27,6 +27,9 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+  environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
        # 拉取代码
       - name: Checkout
@@ -63,6 +66,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./docs/.vitepress/dist
+        # 发布  
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
@@ -72,7 +76,7 @@ jobs:
           branch: gh-pages
           # 静态文件所在目录
           folder: ./docs/.vitepress/dist
-          
+
   # Deployment job
   # deploy:
   #   # environment:
