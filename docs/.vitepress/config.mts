@@ -9,7 +9,6 @@ export default defineConfig({
   lang: 'zh-CN',
   lastUpdated: true,  //最近更新时间
   cleanUrls: true,
-
   /* markdown 配置 */
   markdown: {
     lineNumbers: true,
