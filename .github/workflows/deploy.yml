@@ -56,21 +56,13 @@ jobs:
         run: |
           echo ${{ github.workspace }} 
           pnpm run docs:deploy
+        env:
+          DOC_ENV: production 
       #此操作有助于支持从任何静态站点生成器部署到 GitHub Pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./docs/.vitepress/dist
-
-  # Deployment job
-  deploy:
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
@@ -79,7 +71,26 @@ jobs:
            # GitHub Pages 读取的分支
           branch: gh-pages
           # 静态文件所在目录
-          folder: ./tool-kit/docs/.vitepress/dist
+          folder: ./docs/.vitepress/dist
+          
+  # Deployment job
+  # deploy:
+  #   # environment:
+  #   #   name: github-pages
+  #   #   url: ${{ steps.deployment.outputs.page_url }}
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   name: Deploy
+  #   steps:
+  #     - name: Deploy
+  #       uses: JamesIves/github-pages-deploy-action@v4.3.4
+  #       with:
+  #         # GitHub 密钥
+  #         token: ${{ secrets.ACCESS_TOKEN }}
+  #          # GitHub Pages 读取的分支
+  #         branch: gh-pages
+  #         # 静态文件所在目录
+  #         folder: ./docs/.vitepress/dist
 
 
 
