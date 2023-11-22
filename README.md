@@ -653,3 +653,10 @@ https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-gith
     https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
 
 第三步：Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.3,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看.
+
+注意点：
+1、Generate new token https://blog.csdn.net/weixin_44786530/article/details/131933687
+2、配置到当前仓库
+注意这个 token 是用户级别的，它可以用于访问修改该账户名下的任意仓库。
+
+为了让 Github Action 可以访问到这个token，需要给它做一个配置。配置路径是：在该仓库下的 Settings(注意这个是仓库下的设置而非个人下的设置) -> Secrets -> Actions 点击 New repository secret。

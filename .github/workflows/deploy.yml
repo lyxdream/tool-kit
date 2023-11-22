@@ -64,23 +64,22 @@ jobs:
 
   # Deployment job
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
     steps:
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
           # GitHub 密钥
-          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
            # GitHub Pages 读取的分支
           branch: gh-pages
           # 静态文件所在目录
-          folder: /
-
+          folder: docs/.vitepress/dist
 
 
 
