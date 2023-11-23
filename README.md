@@ -631,6 +631,7 @@ https://vitepress.dev/reference/default-theme-sidebar
 4、组件交互（写文档）
 5、发布
 6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
+7、部署
 
 十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
 使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
@@ -700,7 +701,6 @@ https://www.helloworld.net/p/7045899228
 
 注册 OAuth
 这一步是为了使用 Github 提供的 OAuth2（第三方登录服务）。
-
 地址：https://github.com/settings/applications/new
 https://vssue.js.org/zh/guide/github.html#%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E5%8A%A8%E4%BD%A0%E7%9A%84-vssue
 https://www.helloworld.net/p/7045899228 VitePress 使用 Gitalk 添加评论功能
