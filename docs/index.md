@@ -17,7 +17,7 @@ hero:
 features:
     - icon: 📖
       title: webRTC
-      details: 音视频通话<br />纯前端实现录屏、拍照<br/>虚拟背景，信令服务器
+      details: 纯前端实现录屏、拍照<br />音视频通话<br/>虚拟背景，信令服务器
       link: https://lyxdream.github.io/tool-kit/webrtc/index
       linkText: 常用趣味工具
 

@@ -4,17 +4,21 @@
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
+import Comment from './Comment.vue'
 
 const { isDark, frontmatter } = useData()
 /* 添加自定义 class */
 const className = frontmatter.value.layoutClass
 
 // 增加dark和light时候的动效
-const enableTransitions = () =>
-    'startViewTransition' in document &&
-    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+function enableTransitions() {
+    return (
+        'startViewTransition' in document &&
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+    )
+}
 
-// 使用视图转换 API 见官网
+// 借用https://github.com/unocss/unocss/blob/main/docs/.vitepress/theme/UnoCSSLayout.vue
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     //如果不支持动效直接切换
     if (!enableTransitions()) {
@@ -49,7 +53,11 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 </script>
 
 <template>
-    <DefaultTheme.Layout :class="className" />
+    <DefaultTheme.Layout :class="className">
+        <template #doc-after>
+            <Comment />
+        </template>
+    </DefaultTheme.Layout>
 </template>
 
 <style>

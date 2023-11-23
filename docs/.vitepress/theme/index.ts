@@ -3,26 +3,36 @@ import type { EnhanceAppContext, Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style/index.scss'
 let homePageStyle: HTMLStyleElement | undefined
-import Layout from './Layout.vue'
+import Layout from './Layout/Index.vue'
 
 export default {
     extends: DefaultTheme,
     Layout: Layout,
-    enhanceApp({ app, router, siteData }: EnhanceAppContext) {
-        if (typeof window !== 'undefined') {
-            watch(
-                () => router.route.data.relativePath,
-                () =>
-                    updateHomePageStyle(
-                        /* /tool-kit/ 是为了兼容 GitHub Pages */
-                        location.pathname === '/' ||
-                            location.pathname === '/tool-kit/'
-                    ),
-                { immediate: true }
-            )
-        }
+    enhanceApp({ router }: EnhanceAppContext) {
+        if (typeof window === 'undefined') return
+        watch(
+            () => router.route.data.relativePath,
+            () =>
+                updateHomePageStyle(
+                    /* /tool-kit/ 是为了兼容 GitHub Pages */
+                    location.pathname === '/' ||
+                        location.pathname === '/tool-kit/'
+                ),
+            { immediate: true }
+        )
     }
 } satisfies Theme
+
+if (typeof window !== 'undefined') {
+    // detect browser, add to class for conditional styling
+    const browser = navigator.userAgent.toLowerCase()
+    if (browser.includes('chrome'))
+        document.documentElement.classList.add('browser-chrome')
+    else if (browser.includes('firefox'))
+        document.documentElement.classList.add('browser-firefox')
+    else if (browser.includes('safari'))
+        document.documentElement.classList.add('browser-safari')
+}
 
 // Speed up the rainbow animation on home page
 function updateHomePageStyle(value: boolean) {
