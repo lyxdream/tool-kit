@@ -28,9 +28,9 @@ const init = () => {
                             id: route.data.title, // 可选，推荐设置为页面标题，因为会作为标签传给Github issues，且issues标签有长度限制。
                             owner: 'lyxdream', // GitHub repository 所有者
                             repo: 'tool-kit', // GitHub repository
-                            clientID: 'Iv1.da10cb04dcf7163d', // 自己的clientID
+                            clientID: '11dbb45d44c73d7ef719', // 自己的clientID
                             clientSecret:
-                                '7792cd9af6e9b43e04d8bd896797e3974a886de6', // 自己的clientSecret
+                                '92e86e7622dd7efa6cccdba9848484d084267f92', // 自己的clientSecret
                             admin: ['lyxdream'], // GitHub repository 所有者
                             labels: ['Gitalk'], // GitHub issue 的标签
                             proxy: 'https://mellifluous-bombolone-049a57.netlify.app/github_access_token',

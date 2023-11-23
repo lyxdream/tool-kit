@@ -698,4 +698,11 @@ npm install @vssue/api-github-v4
 https://juejin.cn/post/7250834083046621241
 https://www.helloworld.net/p/7045899228
 
+注册 OAuth
+这一步是为了使用 Github 提供的 OAuth2（第三方登录服务）。
+
+地址：https://github.com/settings/applications/new
 https://vssue.js.org/zh/guide/github.html#%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E5%8A%A8%E4%BD%A0%E7%9A%84-vssue
+https://www.helloworld.net/p/7045899228 VitePress 使用 Gitalk 添加评论功能
+
+https://www.helloworld.net/p/7045899228
