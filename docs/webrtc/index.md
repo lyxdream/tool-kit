@@ -1,8 +1,27 @@
 ---
 layout: doc
-aside: false
-outline: deep1  1111
 ---
+
+# 前端知识点
+
+# 源码阅读
+
+# 算法
+
+# 面试
+
+# 开源项目
+
+-   常用工具包
+-   低代码
+-   埋点sdk
+-   组件库
+-   脚手架
+-   海报生成工具（canvas）
+-   权限系统搭建
+-   监控系统
+
+# 数学
 
 # Runtime API Examples
 
