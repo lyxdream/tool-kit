@@ -706,3 +706,8 @@ https://vssue.js.org/zh/guide/github.html#%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E
 https://www.helloworld.net/p/7045899228 VitePress 使用 Gitalk 添加评论功能
 
 https://www.helloworld.net/p/7045899228
+
+https://vssue.js.org/zh/guide/github.html#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84-oauth-app
+
+给自己的网站添加访问量统计
+https://richard-docs.netlify.app/blogs/b-026
