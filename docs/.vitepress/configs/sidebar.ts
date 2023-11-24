@@ -18,5 +18,15 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
             text: 'vscode-plugin',
             items: [{ text: 'Index', link: '/vscode-plugin/index' }]
         }
+    ],
+    '/note/': [
+        {
+            text: '日常笔记',
+            link: '/note/'
+        },
+        {
+            text: 'vitepress搭建个人博客',
+            items: [{ text: '评论', link: '/note/comment/' }]
+        }
     ]
 }
