@@ -22,11 +22,11 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
     '/note/': [
         {
             text: '日常笔记',
-            link: '/note/'
+            link: '/note/index'
         },
         {
             text: 'vitepress搭建个人博客',
-            items: [{ text: '评论', link: '/note/comment/' }]
+            items: [{ text: '评论', link: '/note/comment' }]
         }
     ]
 }
