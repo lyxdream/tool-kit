@@ -6,6 +6,7 @@ let homePageStyle: HTMLStyleElement | undefined
 import Layout from './Layout/Index.vue'
 import { inBrowser } from 'vitepress'
 import busuanzi from 'busuanzi.pure.js'
+import 'gitalk/dist/gitalk.css'
 
 export default {
     extends: DefaultTheme,

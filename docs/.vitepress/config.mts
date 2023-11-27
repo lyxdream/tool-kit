@@ -12,6 +12,7 @@ export default defineConfig({
   /* markdown 配置 */
   markdown: {
     lineNumbers: true,
+    toc: { level: [1, 2] }
   },
   themeConfig: {
     nav,
