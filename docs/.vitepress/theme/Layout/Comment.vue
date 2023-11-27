@@ -1,5 +1,5 @@
 <template>
-    <div class="content-container"></div>
+    <div class="content-container" id="content-container"></div>
 </template>
 
 <script setup lang="ts">
@@ -29,12 +29,23 @@ const init = () => {
             () => {
                 nextTick(() => {
                     if (typeof window !== undefined) {
-                        const wrap = document.createElement('div')
-                        wrap.setAttribute('id', 'gitalk-page-container')
-                        const comment = document.querySelector(
-                            '.content-container'
-                        ) as HTMLElement
-                        comment.appendChild(wrap) // 把组件加入到想加载的地方
+                        const containerElement =
+                            document.querySelector('.content-container')
+                        if (containerElement) {
+                            const contentElement = document.getElementById(
+                                'gitalk-page-container'
+                            )
+                            if (contentElement) {
+                                //判断是否已有评论组件节点，有则删除，重新创建。
+                                contentElement.removeChild(containerElement)
+                            }
+                            const wrap = document.createElement('div')
+                            wrap.setAttribute('id', 'gitalk-page-container')
+                            const comment = document.querySelector(
+                                '.content-container'
+                            ) as HTMLElement
+                            comment.appendChild(wrap) // 把组件加入到想加载的地方
+                        }
                         const gitTalk = new Gitalk(options)
                         gitTalk.render('gitalk-page-container')
                     }
