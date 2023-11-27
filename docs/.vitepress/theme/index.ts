@@ -4,8 +4,8 @@ import DefaultTheme from 'vitepress/theme'
 import './style/index.scss'
 let homePageStyle: HTMLStyleElement | undefined
 import Layout from './Layout/Index.vue'
-import { inBrowser } from 'vitepress'
-import busuanzi from 'busuanzi.pure.js'
+// import { inBrowser } from 'vitepress'
+// import busuanzi from 'busuanzi.pure.js'
 import 'gitalk/dist/gitalk.css'
 
 export default {
@@ -13,11 +13,11 @@ export default {
     Layout: Layout,
     enhanceApp({ router }: EnhanceAppContext) {
         if (typeof window === 'undefined') return
-        if (inBrowser) {
-            router.onAfterRouteChanged = () => {
-                busuanzi.fetch()
-            }
-        }
+        // if (inBrowser) {
+        //     router.onAfterRouteChanged = () => {
+        //         busuanzi.fetch()
+        //     }
+        // }
         watch(
             () => router.route.data.relativePath,
             () =>

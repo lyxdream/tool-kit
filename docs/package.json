@@ -13,7 +13,6 @@
     "author": "yx",
     "license": "ISC",
     "devDependencies": {
-        "busuanzi.pure.js": "^1.0.3",
         "gitalk": "^1.8.0",
         "sass": "^1.69.5",
         "vitepress": "1.0.0-rc.20",

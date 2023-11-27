@@ -57,9 +57,6 @@ importers:
 
   docs:
     devDependencies:
-      busuanzi.pure.js:
-        specifier: ^1.0.3
-        version: 1.0.3
       gitalk:
         specifier: ^1.8.0
         version: 1.8.0(react-dom@15.7.0)(react@15.7.0)
@@ -1636,10 +1633,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       run-applescript: 5.0.0
-    dev: true
-
-  /busuanzi.pure.js@1.0.3:
-    resolution: {integrity: sha512-tPULdyx+8NNb9geZYDpktKmHAYx9f2LEOBaHyWCaM7iPEMIa/43KgYAUluuU7YG9UFSOFpj4dO7Nj2Vlu3V9Rg==}
     dev: true
 
   /cachedir@2.3.0:
