@@ -12,7 +12,7 @@
 
 ::: tip OAuth App
 
-点击Github的主页用户头像->Settings->Developer settings->OAuth Apps->New Github App 即可进入到创建Github App的页面
+在Github的主页点击用户头像->Settings->Developer settings->OAuth Apps->New Github App 即可进入到创建Github App的页面
 :::
 
 ![OAuth App](/note/oauth_app1.png)
@@ -112,6 +112,26 @@ onMounted(() => {
 </script>
 ```
 
+:::tip 参数说明
+
+id: 可选，推荐设置为页面标题，因为会作为标签传给Github issues，且issues标签有长度限制。
+
+owner: 对应 repository 的拥有者帐号或者团队
+
+repo: 用来存储评论的 repository
+
+clientID: OAuth App 的 client id
+
+clientSecret: OAuth App 的 client secret
+
+admin: GitHub repository 所有者
+
+labels: GitHub issue 的标签
+
+createIssueManually: 如果当前页面没有相应的 isssue 且登录的用户属于 admin，则会自动创建 issue。如果设置为 true，则显示一个初始化页面，创建 issue 需要点击 init 按钮。
+
+:::
+
 > 注意是否在浏览器环境，不然在我们打包的时候找不到 document 会打包失败
 
 -   完成后在 Index.vue 中引入，通过 Layout 的 插槽 将 Comment 组件注入。
@@ -179,3 +199,4 @@ import Comment from './Comment.vue'
 
 -   [VitePress 使用 Gitalk 添加评论功能](https://www.helloworld.net/p/7045899228)
 -   [快速给个人网站集成评论功能](https://juejin.cn/post/7250834083046621241)
+-   [Vssue创建一个新的 OAuth App](https://vssue.js.org/zh/guide/github.html#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84-oauth-app)

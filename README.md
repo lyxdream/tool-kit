@@ -632,6 +632,7 @@ https://vitepress.dev/reference/default-theme-sidebar
 5、发布
 6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
 7、部署
+8、广告
 
 十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
 使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
@@ -697,31 +698,20 @@ VuePress 博客优化之增加 Vssue 评论功能
 Github App提供了一个认证的方式，用户通过创建一个Github App，来设置Github提供的功能和权限，然后将该App安装到某一个repository中，
 这样这个repository就能获取该Github App所赋予的相应操作权限。
 
-创建一个Github App
-
-1.在Github的主页点击用户头像，选择Settings菜单，点击Developer settings菜单，即可进入Github Apps操作页面，点击New Github App按钮，即可进入到创建Github App的页面。
-
+vssue 实现评论功能
 https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0
 
 owner: 对应 repository 的拥有者帐号或者团队
 repo: 用来存储评论的 repository
 clientId: OAuth App 的 client id
 clientSecret: OAuth App 的 client secret （只有在使用某些平台时需要）
+[![Test](https://github.com/vuejs/vitepress/workflows/Test/badge.svg)](https://github.com/vuejs/vitepress/actions)
+[![npm](https://img.shields.io/npm/v/vitepress)](https://www.npmjs.com/package/vitepress)
+[![chat](https://img.shields.io/badge/chat-discord-blue?logo=discord)](https://chat.vuejs.org)
 
 npm install @vssue/api-github-v4  
 https://juejin.cn/post/7250834083046621241
 https://www.helloworld.net/p/7045899228
-
-注册 OAuth
-这一步是为了使用 Github 提供的 OAuth2（第三方登录服务）。
-地址：https://github.com/settings/applications/new
-https://vssue.js.org/zh/guide/github.html#%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E5%8A%A8%E4%BD%A0%E7%9A%84-vssue
-https://www.helloworld.net/p/7045899228 VitePress 使用 Gitalk 添加评论功能
-https://vssue.js.org/zh/guide/github.html#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84-oauth-app
-https://juejin.cn/post/7250834083046621241
-
-https://vssue.js.org/zh/guide/github.html 创建一个新的 OAuth App
-https://vssue.js.org/zh/guide/github.html#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84-oauth-app
 
 报错128的
 https://blog.csdn.net/ibigboy/article/details/126402267

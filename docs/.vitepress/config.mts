@@ -20,6 +20,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/lyxdream/tool-kit' }
     ],
+    externalLinkIcon: true, //外部链接图标
     // 本地搜索
     search: {
       provider: 'local'

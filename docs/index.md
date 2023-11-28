@@ -12,7 +12,10 @@ hero:
     actions:
         - theme: brand
           text: 开始
-          link: /markdown-examples
+          link: /webrtc/index
+        - theme: alt
+          text: GitHub
+          link: https://github.com/lyxdream/tool-kit
 
 features:
     - icon: 📖
