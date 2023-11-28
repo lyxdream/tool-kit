@@ -15,6 +15,46 @@
 推荐使用pnpm，命令行安装npm install -g pnpm。
 创建工程，安装VitePress。首先创建文件夹，并打开命令行。
 
+mkdir docs && cd docs
+pnpm init
+pnpm add -D vitepress
+pnpm add sass -D 安装sass
+pnpm dlx vitepress init 初始化
+
+```
+┌  Welcome to VitePress!
+│
+◇  Where should VitePress initialize the config?
+│  ./docs
+│
+◇  Site title:
+│  tool-kit
+│
+◇  Site description:
+│  工具包
+│
+◇  Theme:
+│  Default Theme + Customization
+│
+◇  Use TypeScript for config and theme files?
+│  Yes
+│
+◇  Add VitePress npm scripts to package.json?
+│  Yes
+│
+└  Done! Now run pnpm run docs:dev and start writing.
+```
+
+https://zhuanlan.zhihu.com/p/631088671
+
+https://vitepress.docschina.org/guide/getting-started.html
+
+https://notes.fe-mm.com/fe/javascript/types
+
+https://zhuanlan.zhihu.com/p/663023274
+
+https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0
+
 :::info
 1111
 :::
