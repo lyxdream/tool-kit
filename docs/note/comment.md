@@ -19,7 +19,7 @@
 
 2. 配置参数注册 OAuth
 
-:::tip 温馨提示
+:::warning 温馨提示
 
 将 Homepage URL 和 Authorization callback URL 设置为你的网站 URL
 （这里我们用 本地地址 作为示例进行调试，线上的时候记得换回线上网站的url）

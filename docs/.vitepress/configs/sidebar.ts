@@ -7,7 +7,7 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
             collapsed: false,
             items: [
                 {
-                    text: 'Index',
+                    text: 'index',
                     link: '/webrtc/index'
                 }
             ]
@@ -16,16 +16,13 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
     '/vscode-plugin/': [
         {
             text: 'vscode-plugin',
-            items: [{ text: 'Index', link: '/vscode-plugin/index' }]
+            items: [{ text: 'index', link: '/vscode-plugin/index' }]
         }
     ],
     '/note/': [
         {
-            text: '日常笔记',
-            link: '/note/index'
-        },
-        {
             text: 'vitepress搭建个人博客',
+            link: '/note/index',
             items: [
                 { text: '集成评论功能', link: '/note/comment' },
                 { text: 'GitHub Actions实现自动部署', link: '/note/deploy' }

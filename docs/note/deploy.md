@@ -6,7 +6,7 @@
 
 建立一个仓库（假设命名为tool-kit），用来存放项目源码。
 
-:::tip 注意
+:::warning 注意
 
 如果要创建用户或组织站点，则存储库必须命名为 xxx.github.io。 如果您的用户或组织名称包含大写字母，您必须小写字母，具体创建过程点击[创建 GitHub Pages 站点](https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/creating-a-github-pages-site)查看。
 :::
@@ -122,7 +122,7 @@ GitHub Actions的环境中提供了很多预置的配置和工具，例如Node.j
 
 具体怎么配置，可以根据自己的需求来，也可以参考[通过 GitHub Pages 使用自定义工作流](https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) 和 [vitepress部署](https://vitepress.dev/guide/deploy)
 
-:::tip 温馨提示
+:::warning 温馨提示
 
 Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.4,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看[github-pages-deploy-action](https://github.com/JamesIves/github-pages-deploy-action)，用这个的原因是有可以选择发布分支的选项branch
 
@@ -178,6 +178,10 @@ git push origin main
 
 ![repo](/note/blog/repo7.png)
 
+![repo](/note/blog/repo8.png)
+
+**打tag**
+
 ```bash
 git tag v1.0.0
 git push origin --tags
@@ -191,7 +195,7 @@ push之后，就会触发Release
 
 ![repo](/note/blog/repo6.png)
 
-往私有仓库推送需要生成一个具有推送私有仓库权限的 token即上面用到的ACCESS_TOKEN，下面补充一下如何获取ACCESS_TOKEN
+往私有仓库推送需要生成一个具有推送私有仓库权限的 token即上面用到的**ACCESS_TOKEN**，下面补充一下如何获取**ACCESS_TOKEN**
 
 ### 获取Github Token
 
@@ -218,7 +222,7 @@ push之后，就会触发Release
 
 ![github token](/note/blog/github_token6.png)
 
-:::tip 注意
+:::warning 注意
 
 出于安全考虑，这个token生成之后只会可见一次，因为后面步骤会使用，所以我们需要做好保存。
 
