@@ -15,7 +15,7 @@
 在Github的主页点击用户头像->Settings->Developer settings->OAuth Apps->New Github App 即可进入到创建Github App的页面
 :::
 
-![OAuth App](/note/oauth_app1.png)
+![OAuth App](/note/blog/oauth_app1.png)
 
 2. 配置参数注册 OAuth
 
@@ -27,13 +27,13 @@
 Authorization callback URL 回调地址，如果没有后端服务的话直接填首页地址
 :::
 
-![OAuth App](/note/oauth_app2.png)
+![OAuth App](/note/blog/oauth_app2.png)
 
 3. 查看生成的 Client ID 和 Client secrets
 
 获取相应的并得到了相应的 Client ID 和 Client Secret。
 
-![OAuth App](/note/oauth_app3.png)
+![OAuth App](/note/blog/oauth_app3.png)
 
 保存你的 Client ID 和 Client secrets,后面会用到
 
@@ -159,26 +159,26 @@ import Comment from './Comment.vue'
 
 -   我们的评论仅限于github用户，会有一个登录的提示
 
-![comment](/note/comment1.png)
+![comment](/note/blog/comment1.png)
 
 -   授权登录
-    ![comment](/note/comment2.png)
+    ![comment](/note/blog/comment2.png)
 
 -   登录成功之后的效果如下：
 
-![comment](/note/comment3.png)
+![comment](/note/blog/comment3.png)
 
 -   评论中
 
-![comment](/note/comment4.png)
+![comment](/note/blog/comment4.png)
 
 -   评论提交之后
 
-![comment](/note/comment5.png)
+![comment](/note/blog/comment5.png)
 
 -   在github issues查看评论
 
-![comment](/note/comment6.png)
+![comment](/note/blog/comment6.png)
 
 > Homepage URL 和 Authorization callback URL 记得发布的时候替换成线上地址
 

@@ -603,117 +603,25 @@ export default {
 
 ```
 
--   支持自己定义主题（支持主题颜色动态变换）
--   增加dark和light时候的动效
--   支持搜索
+十分钟使用vitepress+github action+gitee pages 搭建你的专属文档
+https://zhuanlan.zhihu.com/p/663023274
 
-```
-// 本地搜索 Algolia 搜索
-search: {
-    provider: 'local'
-},
-```
-
--   评论
--   构建发布
-
-doc | home | page
-doc- 将默认文档样式查看 Markdown 内容。
-home- “主页”的特殊布局。您可以添加额外的选项，例如hero和features来快速创建漂亮的登陆页面。
-page- 行为相似，doc但它不应用任何样式的内容。当您想要创建完全自定义的页面时很有用。
-
-导航配置
-https://vitepress.dev/reference/default-theme-sidebar
-
-1、自定义主题(https://vitepress.dev/guide/custom-theme)
-3、搜索
-2、评论
-4、组件交互（写文档）
-5、发布
-6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
-7、部署
-8、广告
-
-十分钟使用vitepress+github action+gitee pages 搭建你的专属文档 https://zhuanlan.zhihu.com/p/663023274
-使用VitePress和Github搭建个人博客网站，可以自动构建和发布 https://zhuanlan.zhihu.com/p/631088671
-购买域名：https://www.jianshu.com/p/1b9f4f0db26d
-https://blog.csdn.net/qq_43173415/article/details/117741139
-https://www.jianshu.com/p/1b9f4f0db26d
-
-1. 部署您的 VitePress 站点
-   2、自动化部署
-
-参考文档 通过 GitHub Pages 使用自定义工作流
-https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
-
-GitHub Actions 入门教程
-https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
-
-## GitHub Actions 实现自动部署静态博客
-
-#前言 发布博客网站
-
-进入你创建的GitHub仓库的配置，具体位置在Settings -> Pages -> Build and deployment -> Source。选择Deploy from a branch，即选择一个分支。
-我们去新建一个名为gh-pages的分支，创建完成后再次打开Pages，可以看到页面发生了变化
-
--   管理个人访问令牌
-    https://docs.github.com/zh/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token
-    https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
-
-    https://docs.github.com/zh/enterprise-server@3.9/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
-
-Github Token获取步骤，使用快人一步 https://blog.csdn.net/weixin_44786530/article/details/131933687
-
-https://github.com/JamesIves/github-pages-deploy-action
-
-https://github.com/marketplace/actions/deploy-github-pages-site
-
-https://docs.github.com/zh/actions/deployment/about-deployments/deploying-with-github-actions
-
-第三步：Deploy 部署，使用的第三方action：JamesIves/github-pages-deploy-action@v4.3.3,它有两个参数：分别是branch、folder，更多关于这个action的详情可以去查看.
+在GitHub用户首页展示个人简介使用VitePress和Github搭建个人博客网站，可以自动构建和发布
+https://zhuanlan.zhihu.com/p/631088671
 
 给自己的网站添加访问量统计
 https://richard-docs.netlify.app/blogs/b-026
-在GitHub用户首页展示个人简介
-https://zhuanlan.zhihu.com/p/631088671
 
-<!-- 自定义侧边目录 -->
-
+自定义侧边目录
 https://blog.csdn.net/qq_30678861/article/details/133853365
-
-##
-
-注意点：
-1、Generate new token https://blog.csdn.net/weixin_44786530/article/details/131933687
-2、配置到当前仓库
-注意这个 token 是用户级别的，它可以用于访问修改该账户名下的任意仓库。
-
-为了让 Github Action 可以访问到这个token，需要给它做一个配置。配置路径是：在该仓库下的 Settings(注意这个是仓库下的设置而非个人下的设置) -> Secrets -> Actions 点击 New repository secret。
+购买域名：https://www.jianshu.com/p/1b9f4f0db26d
 
 基于Github issues + umi 搭建一个免费的带评论功能的博客(一)
 https://juejin.cn/post/6844904025675005966
-
 VuePress 博客优化之增加 Vssue 评论功能
-
-Github App提供了一个认证的方式，用户通过创建一个Github App，来设置Github提供的功能和权限，然后将该App安装到某一个repository中，
-这样这个repository就能获取该Github App所赋予的相应操作权限。
-
 vssue 实现评论功能
 https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0
 
-owner: 对应 repository 的拥有者帐号或者团队
-repo: 用来存储评论的 repository
-clientId: OAuth App 的 client id
-clientSecret: OAuth App 的 client secret （只有在使用某些平台时需要）
 [![Test](https://github.com/vuejs/vitepress/workflows/Test/badge.svg)](https://github.com/vuejs/vitepress/actions)
 [![npm](https://img.shields.io/npm/v/vitepress)](https://www.npmjs.com/package/vitepress)
 [![chat](https://img.shields.io/badge/chat-discord-blue?logo=discord)](https://chat.vuejs.org)
-
-npm install @vssue/api-github-v4  
-https://juejin.cn/post/7250834083046621241
-https://www.helloworld.net/p/7045899228
-
-报错128的
-https://blog.csdn.net/ibigboy/article/details/126402267
-
-https://blog.51cto.com/aiyc/6037421?u_atoken=ec95337f-6f9b-4c7a-848e-136156d911f4&u_asession=01PLZOPmXAvFRDn63z4oZJvmxlK79sFSaRuMsc8oWL5B0xgoOqGfqZu5DCgrDYJiN2t-JkiWDED1lHHRjgzGfT8tsq8AL43dpOnCClYrgFm6o&u_asig=05EMpCYTQwkHLvyfViyF1-fJZo8rdOMM0F4pVuAcwKzwAZQUw4aj5I8SeKWuVGTTnfAALx_jSPfZEq0l2iaaxlns13cKgrst2w03881EO1NfmIbsp5c9KBIr1THnJfrOwYscqEZB2JEeCOq9bA2DGc5N5BSewaVmLTO01sM2Qp15FLgyqS5AUC0OITSClHgsJBksmHjM0JOodanL5-M1Qs1W6dGol_8chOrTC_RShtbIyf0ky3NQqnbxKZ4Z0rqHPwq-VKtODvCHR2CNak6R16c-2nN76-h-IvL0gY8JLpI87Y94r_LXIIil3Y3aVPRGAe&u_aref=3lm7TCjKZgrlGX%2FK9%2BOw3D8Gz2o%3D

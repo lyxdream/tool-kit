@@ -1,3 +1,4 @@
+# 借鉴 https://github.com/vuejs/vitepress/blob/main/.github/workflows/release-tag.yml
 name: Release
 
 on:
