@@ -668,10 +668,6 @@
     animation: rainbow 40s linear infinite;
 }
 
-:root.dark {
-    --vp-c-brand-2: var(--vp-c-brand-light);
-}
-
 @media (prefers-reduced-motion: reduce) {
     :root {
         animation: none !important;

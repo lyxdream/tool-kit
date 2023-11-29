@@ -154,3 +154,6 @@
 .DocSearch {
     --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+:root.dark {
+    --vp-c-brand-2: var(--vp-c-brand-light);
+}

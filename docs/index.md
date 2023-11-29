@@ -1,6 +1,7 @@
 ---
 layout: home
-layoutClass: 'm-home-layout'
+# layoutClass: 'm-home-layout'
+pageClass: m-home-layout
 
 hero:
     name: '前端工具'

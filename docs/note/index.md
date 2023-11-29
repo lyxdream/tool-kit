@@ -3,7 +3,7 @@
 主要实现的功能有以下几个方面：
 
 -   **`1. 基础文档搭建`**
--   **`2. 默认主题扩展`**
+-   **`2. 博客换肤`**
 -   **`3. 支持主题切换`**
 -   **`4. 搜索`**
 -   **`5. 评论`**
@@ -21,14 +21,14 @@
 
 话不多说，下面开始搭建项目~
 
-## 快速搭建项目
+## 初始化工程
 
 ### 安装依赖
 
 新建 site 文件夹,并执行pnpm init,然后安装vitepress和vue，sass
 
 ```bash
-mkdir tool-kit（site名称）
+mkdir tool-kit（创建项目文件夹）
 cd tool-kit
 pnpm init
 pnpm add -D vitepress vue sass
@@ -51,10 +51,10 @@ pnpm vitepress init
 │  ./docs
 │
 ◇  Site title:
-│  tool-kit
+│  My Awesome Project
 │
 ◇  Site description:
-│  工具包
+│  A VitePress Site
 │
 ◇  Theme:
 │  Default Theme + Customization
@@ -86,7 +86,7 @@ Theme 的时候有三种选项：
 
 -   Default Theme：
 
-```
+```sh
 .
 ├─ docs
 │  ├─ .vitepress
@@ -99,7 +99,7 @@ Theme 的时候有三种选项：
 
 -   Default Theme + Customization的：
 
-```
+```sh
 .
 ├─ docs
 │  ├─ .vitepress
@@ -115,7 +115,7 @@ Theme 的时候有三种选项：
 
 -   Custom Theme：
 
-```
+```sh
 .
 ├─ docs
 │  ├─ .vitepress
@@ -147,7 +147,7 @@ docs/.vitepress/dist
 
 > 可能是因为我建的.gitignore在外层，直接写.vitepress/xxx不生效，加上docs/生效了
 
-### 运行
+### 启动服务
 
 执行完本步骤后，将会向你的package.json注入以下脚本:
 
@@ -175,24 +175,265 @@ npm run docs:dev
 
 ## 扩展VitePress默认主题
 
-在 docs/.vitepress/theme 目录下新建 index.ts 文件
+### 删除多余文件
 
-## 配置
-
-上面生成的文件，删除不需要的文件，剩余的目录如下：
+初始化的时候选择的是默认主题+自定义，删除不需要的文件，剩余的目录如下：
 
 ```
 .
 ├─ docs
 │  ├─ .vitepress
 │  │       ├─ theme
-│  │       │   ├─ index.ts
-│  │       │   └─style.css
+│  │       │   └─index.ts
 │  │       └─ config.mts
 │  └─ index.md
 └─ package.json
 
 ```
+
+先介绍一下默认主题的几种布局类型，为下面主题修改做准备
+
+### 了解默认主题layout布局类型：
+
+- **`layout: home`** 首页布局
+  - 解析 Markdown 但不会获得任何默认样式
+  - 具有侧边栏、导航栏、页脚
+  - 支持 **`hero`** 和 **`features`**
+
+- **`layout: doc`**  文档布局（默认）
+  - 解析 Markdown 内置 VitePress 提供的所有样式
+  - 具有侧边栏、导航栏、页脚、本页目录
+
+- **`layout: page`**  页面布局
+  - 解析 Markdown 但不会获得任何默认样式
+  - 具有侧边栏、导航栏、页脚
+
+- **`layout: false`**  无布局（纯空白页）
+  - 解析 Markdown 但不会获得任何默认样式
+
+详情可见[frontmatter 选项仅在使用默认主题时适用](https://vitepress.dev/reference/frontmatter-config#default-theme-only)
+
+准备工作已经到位，接下来我们进入正题～～～
+
+### 实现博客换肤
+
+- 新建rainbow.scss
+
+在 docs/.vitepress/theme 目录下新建style文件夹， 并新建rainbow.scss文件,内容参考[自定义CSS](https://vitepress.dev/guide/extending-default-theme#customizing-css)
+
+- 新建vars.scss
+
+在style文件夹下，新建vars.scss,内容如下：
+
+```scss
+:root {
+    --vp-c-default-1: var(--vp-c-gray-1);
+    --vp-c-default-2: var(--vp-c-gray-2);
+    --vp-c-default-3: var(--vp-c-gray-3);
+    --vp-c-default-soft: var(--vp-c-gray-soft);
+
+    // 用于主品牌颜色，如链接文本、按钮、品牌主题等。
+    --vp-c-brand-1: var(--vp-c-indigo-1);
+    --vp-c-brand-2: var(--vp-c-indigo-2);
+    --vp-c-brand-3: var(--vp-c-indigo-3);
+    --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+    --vp-c-tip-1: var(--vp-c-brand-1);
+    --vp-c-tip-2: var(--vp-c-brand-2);
+    --vp-c-tip-3: var(--vp-c-brand-3);
+    --vp-c-tip-soft: var(--vp-c-brand-soft);
+
+    --vp-c-warning-1: var(--vp-c-yellow-1);
+    --vp-c-warning-2: var(--vp-c-yellow-2);
+    --vp-c-warning-3: var(--vp-c-yellow-3);
+    --vp-c-warning-soft: var(--vp-c-yellow-soft);
+
+    --vp-c-danger-1: var(--vp-c-red-1);
+    --vp-c-danger-2: var(--vp-c-red-2);
+    --vp-c-danger-3: var(--vp-c-red-3);
+    --vp-c-danger-soft: var(--vp-c-red-soft);
+
+    --vp-c-gutter: var(--vp-c-divider);
+    --vp-code-block-bg: rgba(125, 125, 125, 0.04);
+    --vp-code-tab-divider: var(--vp-c-divider);
+    --vp-code-copy-code-bg: rgba(125, 125, 125, 0.1);
+    --vp-code-copy-code-hover-bg: rgba(125, 125, 125, 0.2);
+    --vp-c-disabled-bg: rgba(125, 125, 125, 0.2);
+    --vp-code-tab-text-color: var(--vp-c-text-2);
+    --vp-code-tab-active-text-color: var(--vp-c-text-1);
+    --vp-code-tab-hover-text-color: var(--vp-c-text-1);
+    --vp-code-copy-code-active-text: var(--vp-c-text-2);
+    --vp-c-text-dark-3: rgba(56, 56, 56, 0.8);
+    --vp-c-brand-lightest: var(--vp-c-brand-1);
+
+    --vp-c-highlight-bg: var(--vp-c-brand-light);
+    --vp-c-highlight-text: var(--vp-c-bg);
+}
+
+.dark {
+    --vp-code-block-bg: rgba(0, 0, 0, 0.2);
+    --vp-c-text-code: #c0cec0;
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+:root {
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-white);
+    --vp-button-brand-bg: var(--vp-c-brand-1);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-white);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-white);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+:root {
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(
+        120deg,
+        var(--vp-c-brand-1) 30%,
+        var(--vp-c-brand-next)
+    );
+    --vp-home-hero-image-background-image: linear-gradient(
+        -45deg,
+        var(--vp-c-brand-1) 30%,
+        var(--vp-c-brand-next)
+    );
+    --vp-home-hero-image-filter: blur(80px);
+}
+
+@media (min-width: 640px) {
+    :root {
+        --vp-home-hero-image-filter: blur(120px);
+    }
+}
+
+@media (min-width: 960px) {
+    :root {
+        --vp-home-hero-image-filter: blur(120px);
+    }
+}
+
+/* Safari has a very bad performance on gradient and filter */
+.browser-safari,
+.browser-firefox {
+    --vp-home-hero-image-background-image: transparent;
+    --vp-home-hero-image-filter: '';
+}
+
+/**
+ * Component: Custom Block
+ * -------------------------------------------------------------------------- */
+:root {
+    --vp-custom-block-tip-border: var(--vp-c-brand-1);
+    --vp-custom-block-tip-text: var(--vp-c-brand-darker);
+    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+.dark {
+    --vp-custom-block-tip-border: var(--vp-c-brand-1);
+    --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
+    --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
+}
+
+/**
+ * Component: Algolia
+ * -------------------------------------------------------------------------- */
+.DocSearch {
+    --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+:root.dark {
+    --vp-c-brand-2: var(--vp-c-brand-light);
+}
+```
+
+以上内容做个参考，具体样式可以根据自己的需求来～～
+
+- 新建index.scss 
+
+并在style文件夹下，新建index.scss,引人前面建的两个scss文件
+
+```scss
+@import './rainbow.scss';
+@import './vars.scss';
+```
+
+
+
+在 docs/.vitepress/theme 目录下新建layout文件夹， 并新建index.vue 文件
+
+```vue
+
+
+
+```
+
+
+#### 主题切换过渡动画
+
+在切换颜色模式时提供自定义过渡，具体方法如下：
+
+在 docs/.vitepress/theme 目录下新建layout文件夹， 并新建index.vue 文件
+
+
+
+
+
+
+
+
+```ts
+import { h } from 'vue'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import './style.css'
+
+export default {
+    extends: DefaultTheme,
+    Layout: () => {
+        return h(DefaultTheme.Layout, null, {
+            // https://vitepress.dev/guide/extending-default-theme#layout-slots
+        })
+    },
+    enhanceApp({ app, router, siteData }) {
+        // ...
+    }
+} satisfies Theme
+
+```
+
+
+
+
+主题类型
+
+
+
+
+
+页面布局
+
+
+
+关于上面 Frontmatter 的几点说明：
+
+layout：支持 doc、home、page 三个值，这里使用 home 布局；
+title 和 titleTemplate：在浏览器标签页上面显示；
+features 中的 icon 目前只支持 emojis 图标。
+
+
+
+
+在 docs/.vitepress/theme 目录下新建 index.ts 文件
+
+## 配置
+
+
 
 ### 主页配置
 
@@ -292,3 +533,11 @@ search: {
     provider: 'local'
 },
 ```
+
+
+
+
+## 参考文章
+
+[]()
+[](https://juejin.cn/post/7204860462239498296)
