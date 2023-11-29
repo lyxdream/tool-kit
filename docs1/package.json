@@ -1,21 +1,19 @@
 {
-    "name": "docs",
+    "name": "docs1",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "docs:dev": "vitepress dev --port=8733 --host 0.0.0.0",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "docs:dev": "vitepress dev",
         "docs:build": "vitepress build",
-        "docs:deploy": "APP_BASE_PATH=/tool-kit/ vitepress build",
         "docs:preview": "vitepress preview"
     },
     "keywords": [],
-    "author": "yx",
+    "author": "",
     "license": "ISC",
     "devDependencies": {
-        "gitalk": "^1.8.0",
         "sass": "^1.69.5",
-        "vitepress": "1.0.0-rc.31",
-        "vue": "^3.3.4"
+        "vitepress": "1.0.0-rc.31"
     }
 }

@@ -489,16 +489,6 @@ pnpm dlx vitepress init 初始化
 
 文件结构
 
-```
-.
-├─ docs
-│  ├─ .vitepress
-
-│  ├─ markdown-examples.md
-│  └─ index.md
-└─ package.json
-```
-
 该docs目录被视为VitePress 站点的项目根目录。该.vitepress目录是 VitePress 配置文件、开发服务器缓存、构建输出和可选主题自定义代码的保留位置。
 
 > 默认情况下，VitePress 将其开发服务器缓存存储在 中.vitepress/cache，并将生产构建输出存储在 中.vitepress/dist。如果使用 Git，您应该将它们添加到您的.gitignore文件中。这些位置也可以配置。
@@ -511,6 +501,7 @@ docs/.vitepress/dist
 > 可能是因为我建的.gitignore在外层，直接写.vitepress/xxx不生效，加上docs/生效了
 
 配置文件
+
 配置文件 ( .vitepress/config.js) 允许您自定义 VitePress 站点的各个方面，最基本的选项是站点的标题和描述：
 
 ```js
@@ -625,6 +616,13 @@ https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E
 [![Test](https://github.com/vuejs/vitepress/workflows/Test/badge.svg)](https://github.com/vuejs/vitepress/actions)
 [![npm](https://img.shields.io/npm/v/vitepress)](https://www.npmjs.com/package/vitepress)
 [![chat](https://img.shields.io/badge/chat-discord-blue?logo=discord)](https://chat.vuejs.org)
+
+-   支持自己定义主题（支持主题颜色动态变换）
+-   增加dark和light时候的动效
+-   支持搜索
+-   评论
+-   构建发布
+-   自动化部署
 
 # 数据类型
 

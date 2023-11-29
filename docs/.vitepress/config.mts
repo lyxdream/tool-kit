@@ -41,5 +41,8 @@ export default defineConfig({
       prev: '上一篇',
       next: '下一篇',
     }
+  },
+  sitemap: {
+    hostname: ' http://10.0.17.158:8733/tool-kit/'
   }
 })
