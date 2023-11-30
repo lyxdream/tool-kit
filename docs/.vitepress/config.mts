@@ -8,18 +8,15 @@ export default defineConfig({
   base: process.env.APP_BASE_PATH || '/tool-kit/',
   lang: 'zh-CN',
   lastUpdated: true,  //最近更新时间
-  cleanUrls: true,
+  cleanUrls: true, //VitePress 将从 URL 中删除尾随.html
   /* markdown 配置 */
   markdown: {
-    lineNumbers: true,
-    toc: { level: [1, 2] }
+    lineNumbers: true
   },
   themeConfig: {
+    logo: '/logo.png', //显示在导航栏中网站标题之前的徽标文件。接受路径字符串或对象来为亮/暗模式设置不同的徽标。
     nav,
     sidebar,
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/lyxdream/tool-kit' }
-    ],
     // externalLinkIcon: true, //外部链接图标
     // 本地搜索
     search: {
@@ -34,15 +31,14 @@ export default defineConfig({
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2019-present yx'
     },
-    darkModeSwitchLabel: '外观',
-    returnToTopLabel: '返回顶部',
-    lastUpdatedText: '上次更新',
     docFooter: {
       prev: '上一篇',
-      next: '下一篇',
-    }
-  },
-  sitemap: {
-    hostname: ' http://10.0.17.158:8733/tool-kit/'
+      next: '下一篇'
+    },
+    socialLinks: [ //显示带有图标的社交帐户链接
+      { icon: 'github', link: 'https://github.com/lyxdream/tool-kit' }
+    ],
+    darkModeSwitchLabel: '模式', //在移动端生效
+    lastUpdatedText: '上次更新'
   }
 })

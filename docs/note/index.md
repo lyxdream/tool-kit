@@ -2,11 +2,19 @@
 
 主要实现的功能有以下几个方面：
 
--   **`1. 基础文档搭建`**
--   **`2. 博客换肤`**
--   **`3. 支持主题切换`**
--   **`4. 搜索`**
--   **`5. 评论`**
+-   1. 初始化工程
+-   2. 默认主题扩展
+    -   **`主题颜色动态变换`**
+    -   **`主题切换过渡动画`**
+-   3. 配置文件
+    -   导航栏
+    -   侧边栏
+    -   主页
+    -   页脚
+    -   最近更新时间
+    -   文档页脚文案
+-   4. **`搜索`**
+-   **`5. 接入评论`**
 -   **`6. 自动构建和部署`**
 -   **`7. 实现在线编写`**
 -   **`8. 广告`**
@@ -169,17 +177,20 @@ npm run docs:dev
 ```
 
 效果图如下：
-[]()
+
+![blog1](/note/blog/blog1.png)
 
 一个基础版的项目搭建完毕，下面来看下如何在这个基础版上面搭建属于自己的博客
 
 ## 扩展VitePress默认主题
 
-### 删除多余文件
+### 准备工作
+
+#### 删除多余文件
 
 初始化的时候选择的是默认主题+自定义，删除不需要的文件，剩余的目录如下：
 
-```
+```sh
 .
 ├─ docs
 │  ├─ .vitepress
@@ -193,39 +204,112 @@ npm run docs:dev
 
 先介绍一下默认主题的几种布局类型，为下面主题修改做准备
 
-### 了解默认主题layout布局类型：
+#### 了解默认主题layout布局类型：
 
-- **`layout: home`** 首页布局
-  - 解析 Markdown 但不会获得任何默认样式
-  - 具有侧边栏、导航栏、页脚
-  - 支持 **`hero`** 和 **`features`**
+-   **`layout: home`** 首页布局
 
-- **`layout: doc`**  文档布局（默认）
-  - 解析 Markdown 内置 VitePress 提供的所有样式
-  - 具有侧边栏、导航栏、页脚、本页目录
+    -   解析 Markdown 但不会获得任何默认样式
+    -   具有侧边栏、导航栏、页脚
+    -   支持 **`hero`** 和 **`features`**
+    -   features 中的 icon 目前只支持 emojis 图标
+    -   title 和 titleTemplate：在浏览器标签页上面显示；
 
-- **`layout: page`**  页面布局
-  - 解析 Markdown 但不会获得任何默认样式
-  - 具有侧边栏、导航栏、页脚
+-   **`layout: doc`** 文档布局（默认）
 
-- **`layout: false`**  无布局（纯空白页）
-  - 解析 Markdown 但不会获得任何默认样式
+    -   解析 Markdown 内置 VitePress 提供的所有样式
+    -   具有侧边栏、导航栏、页脚、本页目录
+
+-   **`layout: page`** 页面布局
+
+    -   解析 Markdown 但不会获得任何默认样式
+    -   具有侧边栏、导航栏、页脚
+
+-   **`layout: false`** 无布局（纯空白页）
+    -   解析 Markdown 但不会获得任何默认样式
 
 详情可见[frontmatter 选项仅在使用默认主题时适用](https://vitepress.dev/reference/frontmatter-config#default-theme-only)
 
 准备工作已经到位，接下来我们进入正题～～～
 
-### 实现博客换肤
+### 主题颜色动态变换
 
-- 新建rainbow.scss
+**实现思路：**
 
-在 docs/.vitepress/theme 目录下新建style文件夹， 并新建rainbow.scss文件,内容参考[自定义CSS](https://vitepress.dev/guide/extending-default-theme#customizing-css)
+通过[自定义主题色](<(https://vitepress.dev/guide/extending-default-theme#customizing-css)>)，设置过渡时间实现6s换一次肤
 
-- 新建vars.scss
+**具体实现：**
 
-在style文件夹下，新建vars.scss,内容如下：
+::: code-group
 
-```scss
+```ts [index.ts] {29-31}
+//.vitepress/theme/index.ts
+import { watch } from 'vue'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import './style/index.scss'
+import Layout from './Layout/Index.vue'
+let homePageStyle: HTMLStyleElement | undefined
+
+export default {
+    extends: DefaultTheme,
+    Layout: Layout,
+    enhanceApp({ router }: EnhanceAppContext) {
+        if (typeof window === 'undefined') return
+        watch(
+            () => router.route.data.relativePath,
+            () => updateHomePageStyle(location.pathname === '/'),
+            { immediate: true }
+        )
+    }
+} satisfies Theme
+
+// 设置过渡动画
+function updateHomePageStyle(value: boolean) {
+    if (value) {
+        if (homePageStyle) return
+        homePageStyle = document.createElement('style')
+        homePageStyle.innerHTML = `
+        :root {
+            animation: rainbow 12s linear infinite;
+        }`
+        document.body.appendChild(homePageStyle)
+    } else {
+        if (!homePageStyle) return
+        homePageStyle.remove()
+        homePageStyle = undefined
+    }
+}
+// 如上29-31行所示，设置主题色过渡时间为12s
+```
+
+```vue [index.vue]
+<!-- .vitepress/theme/Layout/index.vue -->
+<script setup lang="ts">
+import DefaultTheme from 'vitepress/theme'
+</script>
+
+<template>
+    <DefaultTheme.Layout> </DefaultTheme.Layout>
+</template>
+```
+
+```scss[index.scss]
+
+//.vitepress/theme/style/index.scss
+@import './rainbow.scss';
+@import './vars.scss';
+
+```
+
+```scss [rainbow.scss]
+
+内容参考[自定义CSS](https://github.com/unocss/unocss/blob/f3bf5218294928f48f5745cd8686261334a7c78d/docs/.vitepress/theme/rainbow.css)
+
+```
+
+```scss [vars.scss]
+//rainbow.scss中一共定义了 82 种颜色，颜色过度时间为 40s，过渡时间可以后续在使用的地方进行动态更改
+
 :root {
     --vp-c-default-1: var(--vp-c-gray-1);
     --vp-c-default-2: var(--vp-c-gray-2);
@@ -352,93 +436,251 @@ npm run docs:dev
 }
 ```
 
+:::
+.vitepress/theme 文件夹下新建Layout和style文件夹
+
+新建完的目录如下：
+
+```sh
+.
+├─ docs
+│  ├─ .vitepress
+│  │       ├─ theme
+│  │       │   ├─ index.ts
+│  │       │   ├─ layout
+│  │       │   │    └─ index.vue
+│  │       │   │
+│  │       │   └─ style
+│  │       │        ├─ index.scss
+│  │       │        ├─ rainbow.scss
+│  │       │        └─ vars.scss
+│  │       │
+│  │       └─ config.mts
+│  └─ index.md
+└─ package.json
+```
+
 以上内容做个参考，具体样式可以根据自己的需求来～～
 
-- 新建index.scss 
+效果如下：
 
-并在style文件夹下，新建index.scss,引人前面建的两个scss文件
+<img  src="/note/blog/effect.gif"/>
 
-```scss
-@import './rainbow.scss';
-@import './vars.scss';
-```
-
-
-
-在 docs/.vitepress/theme 目录下新建layout文件夹， 并新建index.vue 文件
-
-```vue
-
-
-
-```
-
-
-#### 主题切换过渡动画
+### 主题切换过渡动画
 
 在切换颜色模式时提供自定义过渡，具体方法如下：
 
-在 docs/.vitepress/theme 目录下新建layout文件夹， 并新建index.vue 文件
+::: code-group
 
-
-
-
-
-
-
-
-```ts
-import { h } from 'vue'
-import type { Theme } from 'vitepress'
+```vue [index.vue]
+<!-- .vitepress/theme/Layout/index.vue -->
+<script setup lang="ts">
+import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import './style.css'
+import Comment from './Comment.vue'
+const { isDark } = useData()
 
-export default {
-    extends: DefaultTheme,
-    Layout: () => {
-        return h(DefaultTheme.Layout, null, {
-            // https://vitepress.dev/guide/extending-default-theme#layout-slots
-        })
-    },
-    enhanceApp({ app, router, siteData }) {
-        // ...
-    }
-} satisfies Theme
+import { toggleAppearance } from './toggleAppearance'
+toggleAppearance(isDark) //实现切换主题过渡动画
+</script>
 
+<template>
+    <DefaultTheme.Layout />
+</template>
 ```
 
+```ts [toggleAppearance.ts]
+// .vitepress/theme/Layout/toggleAppearance.ts
+// 参考https://github.com/unocss/unocss/blob/main/docs/.vitepress/theme/UnoCSSLayout.vue
+import { nextTick, provide } from 'vue'
+// 增加dark和light时候的动效
+function enableTransitions() {
+    return (
+        'startViewTransition' in document &&
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+    )
+}
+export function toggleAppearance(isDark) {
+    provide(
+        'toggle-appearance',
+        async ({ clientX: x, clientY: y }: MouseEvent) => {
+            //如果不支持动效直接切换
+            if (!enableTransitions()) {
+                isDark.value = !isDark.value
+                return
+            }
+            const clipPath = [
+                `circle(0px at ${x}px ${y}px)`, //圆形的半径为0，位于元素的水平x，垂直y的位置
+                `circle(${Math.hypot(
+                    Math.max(x, innerWidth - x),
+                    Math.max(y, innerHeight - y)
+                )}px at ${x}px ${y}px)` // 平方根 hypot
+            ]
+            // 原生的视图转换动画 View Transitions API startViewTransition
+            await document.startViewTransition(async () => {
+                isDark.value = !isDark.value
+                await nextTick()
+            }).ready
 
+            document.documentElement.animate(
+                { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+                {
+                    duration: 300,
+                    easing: 'ease-in',
+                    pseudoElement: `::view-transition-${
+                        isDark.value ? 'old' : 'new'
+                    }(root)`
+                }
+            )
+        }
+    )
+}
+```
 
+```scss[custom.scss]
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
 
-主题类型
+::view-transition-old(root),
+.dark::view-transition-new(root) {
+    z-index: 1;
+}
 
+::view-transition-new(root),
+.dark::view-transition-old(root) {
+    z-index: 9999;
+}
+```
 
+:::
 
+效果如下：
 
+<img src="/note/blog/toggleAppearance.gif">
 
-页面布局
-
-
-
-关于上面 Frontmatter 的几点说明：
-
-layout：支持 doc、home、page 三个值，这里使用 home 布局；
-title 和 titleTemplate：在浏览器标签页上面显示；
-features 中的 icon 目前只支持 emojis 图标。
-
-
-
-
-在 docs/.vitepress/theme 目录下新建 index.ts 文件
+默认主题暂且做这些扩展，后面有扩展再做补充，接下来看下如何做博客的一些配置~~
 
 ## 配置
 
+配置文件 ( .vitepress/config.mts) 允许自定义 VitePress 站点的各个方面，具体配置详情可看官网[默认主题配置](https://vitepress.dev/reference/default-theme-config)
 
+### 基本配置如下
+
+```ts
+//.vitepress/config.mts
+import { defineConfig } from 'vitepress'
+export default defineConfig({
+    title: '前端工具', //标题
+    description: '开发日常使用中所用到的日常提效工具、插件等', //描述
+    lang: 'zh-CN', //语言类型
+    lastUpdated: true, //最近更新时间
+    cleanUrls: true, //VitePress 将从 URL 中删除尾随.html
+    base: '/tool-kit/',
+    /* markdown 配置 */
+    markdown: {
+        lineNumbers: true
+    },
+    themeConfig: {
+        logo: '/logo.png', //显示在导航栏中网站标题之前的徽标文件。接受路径字符串或对象来为亮/暗模式设置不同的徽标。
+        nav: [{ text: 'Home', link: '/' }],
+        sidebar: [],
+        /* 右侧大纲配置 */
+        outline: {
+            level: 'deep',
+            label: '本页目录'
+        },
+        docFooter: {
+            //文档页脚
+            prev: '上一篇',
+            next: '下一篇'
+        },
+        socialLinks: [
+            //显示带有图标的社交帐户链接
+            { icon: 'github', link: 'https://github.com/lyxdream/tool-kit' }
+        ],
+        darkModeSwitchLabel: '模式', //可用于自定义深色模式开关标签。该标签仅显示在移动视图中。
+        lastUpdatedText: '上次更新' //上次更新文案
+    }
+})
+```
+
+:::tip 提示
+
+-   **`base`**：默认情况下，我们假设站点将部署在域的根路径 ( /) 中。
+    如果您使用 Github（或 GitLab）Pages 并部署到user.github.io/repo/，则将您的设置base为/repo/。
+
+-   **`文档页脚的值可以设置false，不显示`**
+
+```
+export interface DocFooter {
+  prev?: string | false
+  next?: string | false
+}
+```
+
+-   **`markdown配置`**
+
+您可以通过配置为每个代码块启用行号
+
+```
+  markdown: {
+    lineNumbers: true
+  },
+```
+
+:::
+
+### 搜索
+
+搜索可以使用本地搜索，也可以使用Algolia DocSearch或一些社区插件，例如https://www.npmjs.com/package/vitepress-plugin-search或https://www.npmjs.com/package/vitepress-plugin-pagefind。
+
+vitePress支持使用浏览器内索引进行模糊全文搜索。要启用此功能，只需在文件中将themeConfig.search.provider选项设置为：'local'
+
+```ts
+//.vitepress/config.mts
+themeConfig:{
+   ...
+  // 本地搜索
+  search: {
+    provider: 'local'
+  },
+}
+```
+
+结果如下：
+
+### 页脚
+
+themeConfig.footer当存在时，VitePress将在页面底部显示全局页脚。
+
+```ts
+themeConfig:{
+  ...
+  footer: { //页脚
+    message: 'Released under the MIT License.',
+    copyright: 'Copyright © 2019-present yx'
+  },
+}
+
+```
+
+可以在每一页上使用 frontmatter 上的选项取消此功能footer：
+
+```
+---
+footer: false
+---
+
+```
 
 ### 主页配置
 
-```
+```md{2}
 layout: home
+pageClass: m-home-layout
 
 hero:
     name: '前端工具'
@@ -469,13 +711,108 @@ features:
       linkText: 录屏插件
 ```
 
-## 配置文件
+将额外的类名称添加到特定页面 pageClass: m-home-layout,然后可以在文件中自定义该特定页面的样式.vitepress/theme/style/custom.scss：
 
-配置文件 ( .vitepress/config.js) 允许自定义 VitePress 站点的各个方面,还可以通过选项配置主题的行为themeConfig,[参考配置](https://vitepress.dev/reference/site-config)。
+```scss[custom.scss]
+...
+/*图片转圈圈效果*/
+.m-home-layout {
+    .image-src:hover {
+        transform: translate(-50%, -50%) rotate(666turn);
+        transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
+    }
+}
+
+/* 首页样式修改 */
+.VPHero {
+    .image-bg {  //修改图片样式
+        opacity: 0.8;
+        transition: opacity 1s ease;
+    }
+    .text { //修改文案样式
+        line-height: 64px;
+        font-size: 42px;
+    }
+}
+```
+
+最后新建docs/public文件夹，放入logo.png图片
+
+### 导航栏、侧边栏、头部
+
+新建/docs/.vitepress/configs/
+
+::: code-group
+
+```ts[config.mts]
+import { sidebar, nav } from './configs'
+ themeConfig: {
+  ...
+   nav,
+   sidebar
+ }
+
+```
+
+```ts [index.ts]
+///docs/.vitepress/configs/index.ts
+export * from './head'
+export * from './nav'
+export * from './sidebar'
+```
+
+```ts [head.ts] {5}
+import type { HeadConfig } from 'vitepress'
+
+export const head: HeadConfig[] = [
+    ['meta', { name: 'theme-color', content: '#9f7ce9' }],
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['meta', { name: 'keywords', content: '工具包' }]
+]
+```
+
+```ts [nav.ts]
+import type { DefaultTheme } from 'vitepress'
+
+export const nav: DefaultTheme.Config['nav'] = [
+    { text: '首页', link: '/' },
+    { text: 'webRTC', link: '/webrtc/index' },
+    { text: 'vscode插件', link: '/vscode-plugin/index' }
+]
+```
+
+```ts [sidebar.ts]
+import type { DefaultTheme } from 'vitepress'
+
+export const sidebar: DefaultTheme.Config['sidebar'] = {
+    '/webrtc/': [
+        {
+            text: 'webrtc',
+            collapsed: false,
+            items: [
+                {
+                    text: 'index',
+                    link: '/webrtc/index'
+                }
+            ]
+        }
+    ],
+    '/vscode-plugin/': [
+        {
+            text: 'vscode-plugin',
+            items: [{ text: 'index', link: '/vscode-plugin/index' }]
+        }
+    ]
+}
+```
+
+:::
+
+:::tip
+其中 ['link', { rel: 'icon', href: '/favicon.ico' }]为网站最顶部栏的图标
+:::
 
 ## 部署
-
-## 项目初始化
 
 https://zhuanlan.zhihu.com/p/631088671
 
@@ -503,19 +840,7 @@ https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E
 1111
 :::
 
-1. 默认主题扩展(https://vitepress.dev/guide/custom-theme)
-2. 搜索
-   2、评论
-   4、组件交互（写文档）
-   5、发布
-   7、部署
-   8、广告
-   6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
-
-doc | home | page
-doc- 将默认文档样式查看 Markdown 内容。
-home- “主页”的特殊布局。您可以添加额外的选项，例如hero和features来快速创建漂亮的登陆页面。
-page- 行为相似，doc但它不应用任何样式的内容。当您想要创建完全自定义的页面时很有用。
+6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
 
 导航配置
 https://vitepress.dev/reference/default-theme-sidebar
@@ -533,9 +858,6 @@ search: {
     provider: 'local'
 },
 ```
-
-
-
 
 ## 参考文章
 

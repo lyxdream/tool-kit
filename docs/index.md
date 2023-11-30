@@ -1,6 +1,5 @@
 ---
 layout: home
-# layoutClass: 'm-home-layout'
 pageClass: m-home-layout
 
 hero:

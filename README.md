@@ -624,6 +624,10 @@ https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E
 -   构建发布
 -   自动化部署
 
+const { frontmatter } = useData()
+/_ 添加自定义 class _/
+const className = frontmatter.value.layoutClass
+
 # 数据类型
 
 ::: tip 温馨提示
