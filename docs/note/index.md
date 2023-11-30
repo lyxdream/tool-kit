@@ -7,17 +7,17 @@
     -   **`主题颜色动态变换`**
     -   **`主题切换过渡动画`**
 -   3. 配置文件
-    -   导航栏
-    -   侧边栏
-    -   主页
+    -   **`导航栏`**
+    -   **`侧边栏`**
+    -   **`主页`**
     -   页脚
     -   最近更新时间
     -   文档页脚文案
 -   4. **`搜索`**
--   **`5. 接入评论`**
--   **`6. 自动构建和部署`**
--   **`7. 实现在线编写`**
--   **`8. 广告`**
+-   5. **`接入评论`**
+-   6. **`自动构建和部署`**
+-   7. **`实现在线编写`**
+-   8. **`接入广告`**
 
 :::tip 提示
 首先需要本地安装Node.js，需要18版本及以上。
@@ -635,7 +635,7 @@ export interface DocFooter {
 
 ### 搜索
 
-搜索可以使用本地搜索，也可以使用Algolia DocSearch或一些社区插件，例如https://www.npmjs.com/package/vitepress-plugin-search或https://www.npmjs.com/package/vitepress-plugin-pagefind。
+搜索可以使用本地搜索，也可以使用Algolia DocSearch或一些社区插件，例如https://www.npmjs.com/package/vitepress-plugin-search或https://www.npmjs.com/package/vitepress-plugin-pagefind
 
 vitePress支持使用浏览器内索引进行模糊全文搜索。要启用此功能，只需在文件中将themeConfig.search.provider选项设置为：'local'
 
@@ -651,6 +651,8 @@ themeConfig:{
 ```
 
 结果如下：
+
+<img src="/note/blog/search.png">
 
 ### 页脚
 
@@ -738,13 +740,19 @@ features:
 
 最后新建docs/public文件夹，放入logo.png图片
 
+
+
 ### 导航栏、侧边栏、头部
 
-新建/docs/.vitepress/configs/
+新建docs/.vitepress/configs 文件夹
+
+sidebar 详情参考[导航配置](https://vitepress.dev/reference/default-theme-sidebar)
+
 
 ::: code-group
 
-```ts[config.mts]
+```ts [config.mts]
+///docs/.vitepress/config.mts
 import { sidebar, nav } from './configs'
  themeConfig: {
   ...
@@ -762,6 +770,7 @@ export * from './sidebar'
 ```
 
 ```ts [head.ts] {5}
+///docs/.vitepress/configs/head.ts
 import type { HeadConfig } from 'vitepress'
 
 export const head: HeadConfig[] = [
@@ -772,6 +781,8 @@ export const head: HeadConfig[] = [
 ```
 
 ```ts [nav.ts]
+///docs/.vitepress/configs/nav.ts
+// 导航栏
 import type { DefaultTheme } from 'vitepress'
 
 export const nav: DefaultTheme.Config['nav'] = [
@@ -782,6 +793,8 @@ export const nav: DefaultTheme.Config['nav'] = [
 ```
 
 ```ts [sidebar.ts]
+///docs/.vitepress/configs/sidebar.ts
+//侧边栏
 import type { DefaultTheme } from 'vitepress'
 
 export const sidebar: DefaultTheme.Config['sidebar'] = {
@@ -812,54 +825,73 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
 其中 ['link', { rel: 'icon', href: '/favicon.ico' }]为网站最顶部栏的图标
 :::
 
-## 部署
+接着在docs文件夹下新建webrtc和vscode-plugin文件夹，并在这两个目录下分别新建index.md文件
 
-https://zhuanlan.zhihu.com/p/631088671
+:::code-group 
 
-https://vitepress.docschina.org/guide/getting-started.html
+``` md[index.md]
+//docs/webrtc/index
+# 录屏
+```
 
-https://notes.fe-mm.com/fe/javascript/types
-
-https://zhuanlan.zhihu.com/p/663023274
-
-https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0
-
-:::info
-1111
+```md [index.md]
+//docs/vscode-plugin/index
+# 插件
+```
 :::
 
-:::tip
-1111
-:::
+至此简单的搭建已经完成，完整目录如下：
 
-:::warning
-1111
-:::
-
-:::danger
-1111
-:::
-
-6、表情 https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json
-
-导航配置
-https://vitepress.dev/reference/default-theme-sidebar
-
--   支持自己定义主题（支持主题颜色动态变换）
--   增加dark和light时候的动效
--   支持搜索
--   评论
--   构建发布
--   自动化部署
+```sh
+.
+├─ docs
+│  ├─ .vitepress
+│  │       ├─ theme
+│  │       │   ├─ index.ts
+│  │       │   ├─ layout
+│  │       │   │    └─ index.vue
+│  │       │   │
+│  │       │   └─ style
+│  │       │        ├─ index.scss
+│  │       │        ├─ rainbow.scss
+│  │       │        └─ vars.scss
+│  │       ├─ configs
+│  │       │   ├─ index.ts
+│  │       │   ├─ head.ts
+│  │       │   ├─ nav.ts
+│  │       │   └─ sidebar.ts
+│  │       │
+│  │       └─ config.mts
+│  ├─ public
+│  │     └─ logo.png
+│  ├─ vscode-plugin
+│  │      └─ index.ts
+│  ├─ webrtc
+│  │      └─ index.ts
+│  └─ index.md
+└─ package.json
 
 ```
-// 本地搜索 Algolia 搜索
-search: {
-    provider: 'local'
-},
-```
+
+## 接入评论
+
+详情见[集成评论功能](/note/comment)
+
+## 自动构建和部署
+
+详情见[GitHub Actions 实现自动部署静态博客](/note/deploy)
+
+## 实现在线编写
+
+todo
+
+## 接入广告
+
+todo
+
+一个简易的博客搭建完啦，后续再补充其他功能～～
 
 ## 参考文章
+[vitepress](https://vitepress.dev/guide/what-is-vitepress)
 
-[]()
-[](https://juejin.cn/post/7204860462239498296)
+[使用 VitePress 打造个人前端导航网站](https://juejin.cn/post/7204860462239498296)

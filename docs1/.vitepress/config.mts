@@ -9,10 +9,8 @@ export default defineConfig({
   base: process.env.APP_BASE_PATH || '/tool-kit/',
   themeConfig: {
     logo: '/logo.png', //显示在导航栏中网站标题之前的徽标文件。接受路径字符串或对象来为亮/暗模式设置不同的徽标。
-    nav: [
-      { text: 'Home', link: '/' }
-    ],
-    sidebar: [],
+    sidebar, 
+    nav,
     socialLinks: [//显示带有图标的社交帐户链接
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ],
