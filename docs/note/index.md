@@ -166,7 +166,7 @@ docs/.vitepress/dist
 ```json
 //package.json
  "scripts": {
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --port=8735 --host 0.0.0.0",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
@@ -441,7 +441,7 @@ import DefaultTheme from 'vitepress/theme'
 ```
 
 :::
-.vitepress/theme 文件夹下新建Layout和style文件夹
+.vitepress/theme 文件夹下新建Layout和style文件夹,并在doc新建public文件夹从放图片、字体等
 
 新建完的目录如下：
 
@@ -460,6 +460,7 @@ import DefaultTheme from 'vitepress/theme'
 │  │       │        └─ vars.scss
 │  │       │
 │  │       └─ config.mts
+│  ├─ public
 │  └─ index.md
 └─ package.json
 ```
@@ -892,6 +893,7 @@ todo
 │  │       │
 │  │       └─ config.mts
 │  ├─ public
+│  │     ├─ favicon.ico
 │  │     └─ logo.png
 │  ├─ vscode-plugin
 │  │      └─ index.ts
