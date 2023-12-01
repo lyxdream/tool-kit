@@ -1,10 +1,11 @@
 import { defineConfig } from 'vitepress'
-import { sidebar, nav } from './configs'
+import { sidebar, nav, head } from './configs'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "前端工具",
   description: "开发日常使用中所用到的日常提效工具、插件等",
   // base:'/tool-kit/',
+  head,
   base: process.env.APP_BASE_PATH || '/tool-kit/',
   lang: 'zh-CN',
   lastUpdated: true,  //最近更新时间

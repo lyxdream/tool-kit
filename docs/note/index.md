@@ -235,7 +235,7 @@ npm run docs:dev
 
 **实现思路：**
 
-通过[自定义主题色](<(https://vitepress.dev/guide/extending-default-theme#customizing-css)>)，设置过渡时间实现6s换一次肤
+通过[自定义主题色](https://vitepress.dev/guide/extending-default-theme#customizing-css)，设置过渡时间实现6s换一次肤
 
 **具体实现：**
 
@@ -740,14 +740,11 @@ features:
 
 最后新建docs/public文件夹，放入logo.png图片
 
-
-
 ### 导航栏、侧边栏、头部
 
 新建docs/.vitepress/configs 文件夹
 
 sidebar 详情参考[导航配置](https://vitepress.dev/reference/default-theme-sidebar)
-
 
 ::: code-group
 
@@ -827,17 +824,19 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
 
 接着在docs文件夹下新建webrtc和vscode-plugin文件夹，并在这两个目录下分别新建index.md文件
 
-:::code-group 
+:::code-group
 
-``` md[index.md]
+```md[index.md]
 //docs/webrtc/index
 # 录屏
 ```
 
 ```md [index.md]
 //docs/vscode-plugin/index
+
 # 插件
 ```
+
 :::
 
 至此简单的搭建已经完成，完整目录如下：
@@ -892,6 +891,7 @@ todo
 一个简易的博客搭建完啦，后续再补充其他功能～～
 
 ## 参考文章
+
 [vitepress](https://vitepress.dev/guide/what-is-vitepress)
 
 [使用 VitePress 打造个人前端导航网站](https://juejin.cn/post/7204860462239498296)
