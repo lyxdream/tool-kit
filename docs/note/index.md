@@ -1,5 +1,9 @@
 # vitePress快速搭建个人博客
 
+博客效果如下：
+
+<img src="/note/blog/bolg.gif" />
+
 主要实现的功能有以下几个方面：
 
 -   1. 初始化工程
@@ -629,6 +633,8 @@ export interface DocFooter {
   markdown: {
     lineNumbers: true
   },
+
+  其他参数的功能可见注释
 ```
 
 :::
@@ -837,40 +843,11 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
 # 插件
 ```
 
+首页的效果图如下：
+
+<img src="/note/blog/home.png" />
+
 :::
-
-至此简单的搭建已经完成，完整目录如下：
-
-```sh
-.
-├─ docs
-│  ├─ .vitepress
-│  │       ├─ theme
-│  │       │   ├─ index.ts
-│  │       │   ├─ layout
-│  │       │   │    └─ index.vue
-│  │       │   │
-│  │       │   └─ style
-│  │       │        ├─ index.scss
-│  │       │        ├─ rainbow.scss
-│  │       │        └─ vars.scss
-│  │       ├─ configs
-│  │       │   ├─ index.ts
-│  │       │   ├─ head.ts
-│  │       │   ├─ nav.ts
-│  │       │   └─ sidebar.ts
-│  │       │
-│  │       └─ config.mts
-│  ├─ public
-│  │     └─ logo.png
-│  ├─ vscode-plugin
-│  │      └─ index.ts
-│  ├─ webrtc
-│  │      └─ index.ts
-│  └─ index.md
-└─ package.json
-
-```
 
 ## 接入评论
 
@@ -889,6 +866,41 @@ todo
 todo
 
 一个简易的博客搭建完啦，后续再补充其他功能～～
+
+目录如下：
+
+```sh
+.
+├─ docs
+│  ├─ .vitepress
+│  │       ├─ theme
+│  │       │   ├─ index.ts
+│  │       │   ├─ layout
+│  │       │        ├─ Comment.vue
+│  │       │   │    └─ index.vue
+│  │       │   │
+│  │       │   └─ style
+│  │       │        ├─ index.scss
+│  │       │        ├─ rainbow.scss
+│  │       │        ├─ custom.scss
+│  │       │        └─ vars.scss
+│  │       ├─ configs
+│  │       │   ├─ index.ts
+│  │       │   ├─ head.ts
+│  │       │   ├─ nav.ts
+│  │       │   └─ sidebar.ts
+│  │       │
+│  │       └─ config.mts
+│  ├─ public
+│  │     └─ logo.png
+│  ├─ vscode-plugin
+│  │      └─ index.ts
+│  ├─ webrtc
+│  │      └─ index.ts
+│  └─ index.md
+└─ package.json
+
+```
 
 ## 参考文章
 

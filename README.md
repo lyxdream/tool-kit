@@ -479,9 +479,6 @@ npm install -D lint-staged
 npx --no-install lint-staged
 ```
 
-
-
-
 7、创建文档
 
 mkdir docs && cd docs
@@ -489,68 +486,6 @@ pnpm init
 pnpm add -D vitepress
 pnpm add sass -D 安装sass
 pnpm dlx vitepress init 初始化
-
-文件结构
-
-该docs目录被视为VitePress 站点的项目根目录。该.vitepress目录是 VitePress 配置文件、开发服务器缓存、构建输出和可选主题自定义代码的保留位置。
-
-> 默认情况下，VitePress 将其开发服务器缓存存储在 中.vitepress/cache，并将生产构建输出存储在 中.vitepress/dist。如果使用 Git，您应该将它们添加到您的.gitignore文件中。这些位置也可以配置。
-
-```
-docs/.vitepress/cache
-docs/.vitepress/dist
-```
-
-> 可能是因为我建的.gitignore在外层，直接写.vitepress/xxx不生效，加上docs/生效了
-
-
-默认主题配置
-
-```
-import { defineConfig } from 'vitepress'
-
-export default defineConfig({
-  themeConfig: {
-    // Type is `DefaultTheme.Config`
-  }
-})
-```
-
-自定义主题：
-
-如果您使用自定义主题并希望对主题配置进行类型检查，则需要改为使用自定义主题defineConfigWithTheme，并通过通用参数传入自定义主题的配置类型：
-
-```
-import { defineConfigWithTheme } from 'vitepress'
-import type { ThemeConfig } from 'your-theme'
-
-export default defineConfigWithTheme<ThemeConfig>({
-  themeConfig: {
-    // Type is `ThemeConfig`
-  }
-})
-```
-
-具体配置，可查看[站点配置](https://vitepress.dev/reference/site-config)
-
-为主页添加额外的class名称
-
-## yaml
-
-## layoutClass: 'm-home-layout'
-
-然后您可以在文件中自定义特定页面的样式.vitepress/theme/custom.scss：
-
-```scss
-.m-home-layout {
-    .image-src:hover {
-        transform: translate(-50%, -50%) rotate(666turn);
-        transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
-    }
-}
-```
-
-
 
 十分钟使用vitepress+github action+gitee pages 搭建你的专属文档
 https://zhuanlan.zhihu.com/p/663023274
@@ -571,18 +506,7 @@ VuePress 博客优化之增加 Vssue 评论功能
 vssue 实现评论功能
 https://vssue.js.org/zh/guide/getting-started.html#%E9%80%89%E6%8B%A9%E4%BD%A0%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0
 
-[![Test](https://github.com/vuejs/vitepress/workflows/Test/badge.svg)](https://github.com/vuejs/vitepress/actions)
-[![npm](https://img.shields.io/npm/v/vitepress)](https://www.npmjs.com/package/vitepress)
-[![chat](https://img.shields.io/badge/chat-discord-blue?logo=discord)](https://chat.vuejs.org)
-
-
 https://zhuanlan.zhihu.com/p/631088671
 https://notes.fe-mm.com/fe/javascript/types
+
 同步gitee https://zhuanlan.zhihu.com/p/663023274
-
-
-
-
-
-
-
